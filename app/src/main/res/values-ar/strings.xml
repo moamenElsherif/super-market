@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login">تسجيل الدخول</string>
+    <string name="mobile_no">رقم الهاتف</string>
+    <string name="password">الرقم السري</string>
+    <string name="forget_password">نسيت الرقم السري ؟</string>
+    <string name="not_registered_yet_click_here_to">لم تسجل الدخول بعد؟ اضغط هنا</string>
+    <string name="signup">تسجيل الدخول</string>
+    <string name="verify_your_number">تأكيد رقم الهاتف</string>
+    <string name="_20">+20</string>
+    <string name="enter_received_code_here">ادخل الرقم المرسل هنا</string>
+    <string name="next">التالي</string>
+    <string name="invalid_number">رقم غير صحيح</string>
+    <string name="empty_number">برجاء ادخال رقم الهاتف</string>
+    <string name="empty_password">برجاء ادخال كلمه السر</string>
+    <string name="empty_data">برجاء ادخال بيناتك</string>
+
+    <string name="no_connection_error_message">Well…, there\'s no internet connection. Please, Check it and try again</string>
+    <string name="client_side_error_message">We couldn\'t get what you\'re looking for. Please, try again later</string>
+    <string name="server_side_error_message">Our servers are overloaded at the moment. Please, try again later</string>
+    <string name="api_query_limit_exceeded_error_message">The API query limit has been exceeded. Please, try again later</string>
+    <string name="unknown_host_exception_and_socket_timeout_exception_message">Please, check your internet connection and try again later</string>
+    <string name="ssl_handshake_exception_message">The network you\'re connected to is unsafe. Please, change it and try again later</string>
+    <string name="generic_exception_and_generic_error_message">An error occurred. Please, try again later</string>
+    <string name="anErrorOccured">An Error Occured</string>
+    <string name="register">التسجيل</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="name">الاسم</string>
+</resources>

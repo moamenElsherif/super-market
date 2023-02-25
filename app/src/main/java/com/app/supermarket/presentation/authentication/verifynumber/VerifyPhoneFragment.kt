@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.databinding.FragmentVerifyPhoneBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VerifyPhoneFragment :BaseFragment<FragmentVerifyPhoneBinding>(){
     override val layoutRes: Int
         get() = R.layout.fragment_verify_phone
 
     override fun initUI(savedInstanceState: Bundle?) {
+
     }
 
 }

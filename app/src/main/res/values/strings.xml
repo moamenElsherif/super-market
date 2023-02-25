@@ -1,5 +1,30 @@
 <resources>
-    <string name="app_name">Super Market</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">Super Market</string>
+    <string name="login">Login</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="not_registered_yet_click_here_to">Not Registered yet? Click here to</string>
+    <string name="signup">SignUp</string>
+    <string name="verify_your_number">Verify Your Number</string>
+    <string name="_20">+20</string>
+    <string name="enter_received_code_here">enter received code here</string>
+    <string name="next">Next</string>
+    <string name="invalid_number">Invalid Phone Number</string>
+    <string name="empty_number">Please enter your number</string>
+    <string name="empty_password">please enter your password</string>
+    <string name="empty_data">please enter your data</string>
+
+
+    <string name="no_connection_error_message">Well…, there\'s no internet connection. Please, Check it and try again</string>
+    <string name="client_side_error_message">We couldn\'t get what you\'re looking for. Please, try again later</string>
+    <string name="server_side_error_message">Our servers are overloaded at the moment. Please, try again later</string>
+    <string name="api_query_limit_exceeded_error_message">The API query limit has been exceeded. Please, try again later</string>
+    <string name="unknown_host_exception_and_socket_timeout_exception_message">Please, check your internet connection and try again later</string>
+    <string name="ssl_handshake_exception_message">The network you\'re connected to is unsafe. Please, change it and try again later</string>
+    <string name="generic_exception_and_generic_error_message">An error occurred. Please, try again later</string>
+    <string name="anErrorOccured">An Error Occured</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
 </resources>

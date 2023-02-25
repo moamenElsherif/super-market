@@ -1,9 +1,11 @@
 package com.app.supermarket.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -11,11 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.supermarket.presentation.hideLoadingDialog
+import com.app.supermarket.presentation.showLoadingDialog
 import java.lang.Exception
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
 
     var isShown: Boolean = false
+    private var progressDialog: Dialog? = null
+
 
     protected lateinit var binding: D
 
@@ -41,6 +47,14 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
             false
         )
     }
+
+    fun showLoading() {
+        hideLoading()
+        progressDialog = showLoadingDialog(requireActivity(), null)
+    }
+
+    fun hideLoading() = hideLoadingDialog(progressDialog, requireActivity())
+
 
     protected abstract fun initUI(savedInstanceState: Bundle?)
 
@@ -97,6 +111,10 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
         val activity = activity
         if (activity is BaseActivity<*>)
             activity.addFragment(fragmentManager, fragment, id, addToBackStack)
+    }
+
+   open fun createToast(stringId: Int){
+        Toast.makeText(this.requireContext(), this.requireContext().getString(stringId), Toast.LENGTH_SHORT).show()
     }
 
 

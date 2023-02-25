@@ -1,18 +1,86 @@
 package com.app.supermarket.presentation.authentication.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
+import com.app.supermarket.base.Resource
 import com.app.supermarket.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(){
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
     override val layoutRes: Int
         get() = R.layout.fragment_login
 
+    private var phoneNumber: String? = null
+    private var password: String? = null
+
+    private val viewModel: LoginViewModel by viewModels()
+
     override fun initUI(savedInstanceState: Bundle?) {
+        binding.loginListener = this
+        observeEvents()
+        setupObservers()
+    }
+
+    private fun observeEvents() {
+        viewModel.loginEvents.observe(this) {
+            when (it) {
+                LoginEvents.InvalidNumber -> {
+                    createToast(R.string.invalid_number)
+                }
+                LoginEvents.PasswordEmpty -> {
+                    createToast(R.string.empty_password)
+                }
+                LoginEvents.PhoneNumberEmpty -> {
+                    createToast(R.string.empty_number)
+                }
+                LoginEvents.EmptyData -> {
+                    createToast(R.string.empty_data)
+                }
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launchWhenResumed {
+            viewModel.logInResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        showLoading()
+                        hideKeyboard()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        createToast(R.string.login)
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        createToast(R.string.anErrorOccured)
+                    }
+                    else -> {
+                        hideLoading()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun clickLogin() {
+        phoneNumber = binding.edPhone.text.toString()
+        password = binding.edPassword.text.toString()
+        viewModel.login(phoneNumber, password)
+    }
+
+    override fun clickRegister() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+    }
+
+    override fun clickForgetPassword() {
+        Toast.makeText(this.requireContext(), "click forget password", Toast.LENGTH_SHORT).show()
     }
 }

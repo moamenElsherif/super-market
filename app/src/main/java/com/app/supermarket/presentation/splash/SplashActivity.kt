@@ -12,8 +12,10 @@ import com.app.supermarket.base.BaseActivity
 import com.app.supermarket.databinding.ActivitySplashBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import com.app.supermarket.presentation.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override val layoutRes: Int
         get() = R.layout.activity_splash
