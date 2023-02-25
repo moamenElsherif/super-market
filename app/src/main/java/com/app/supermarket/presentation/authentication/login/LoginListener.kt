@@ -4,4 +4,5 @@ interface LoginListener {
     fun clickLogin()
     fun clickRegister()
     fun clickForgetPassword()
+    fun clickChangeLang()
 }

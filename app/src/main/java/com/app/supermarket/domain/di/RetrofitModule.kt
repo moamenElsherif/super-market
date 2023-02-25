@@ -3,6 +3,7 @@ package com.app.supermarket.domain.di
 import android.content.Context
 import android.util.Log
 import com.app.supermarket.BuildConfig
+import com.app.supermarket.base.Constants.baseUrl
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
@@ -28,7 +29,6 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     const val REQUEST_TIME_OUT: Long = 60
-    const val baseUrl = "https://eshoppingmarketwebhost20230217211813.azurewebsites.net/"
 
     @Provides
     @Singleton

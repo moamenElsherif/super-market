@@ -8,5 +8,4 @@ import javax.inject.Inject
 
 
 class MyPrefs @Inject constructor(@ApplicationContext context: Context) : BasePreferenceStorage(context) {
-
 }

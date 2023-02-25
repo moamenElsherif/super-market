@@ -1,6 +1,8 @@
 package com.app.supermarket.base
 
 import android.app.Dialog
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.presentation.hideLoadingDialog
 import com.app.supermarket.presentation.showLoadingDialog
 import java.lang.Exception
+import java.util.*
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
 
@@ -45,6 +48,22 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
             layout,
             null,
             false
+        )
+    }
+
+    val getCurrentLanguage: Locale
+        get() = Locale.getDefault()
+
+    fun setLocale(lang: String?) {
+        val locale = lang?.let { Locale(it) }
+        if (locale != null) {
+            Locale.setDefault(locale)
+        }
+        val config = Configuration()
+        config.locale = locale
+        context?.resources?.updateConfiguration(
+            config,
+            context?.resources?.displayMetrics
         )
     }
 

@@ -1,15 +1,21 @@
 package com.app.supermarket.presentation.authentication.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
+import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.databinding.FragmentLoginBinding
+import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
@@ -25,6 +31,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
         binding.loginListener = this
         observeEvents()
         setupObservers()
+        initLang()
+    }
+
+    private fun initLang() {
+        if (getCurrentLanguage.language == Constants.english) {
+            binding.tvLang.text = Constants.arabic
+        } else binding.tvLang.text = Constants.english
     }
 
     private fun observeEvents() {
@@ -42,6 +55,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
                 LoginEvents.EmptyData -> {
                     createToast(R.string.empty_data)
                 }
+                else -> createToast(R.string.invalid_data)
             }
         }
     }
@@ -71,8 +85,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
     }
 
     override fun clickLogin() {
-        phoneNumber = binding.edPhone.text.toString()
-        password = binding.edPassword.text.toString()
+        phoneNumber = binding.edPhone.text?.trim().toString()
+        password = binding.edPassword.text?.trim().toString()
         viewModel.login(phoneNumber, password)
     }
 
@@ -81,6 +95,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
     }
 
     override fun clickForgetPassword() {
-        Toast.makeText(this.requireContext(), "click forget password", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment())
     }
+
+    override fun clickChangeLang() {
+        if (getCurrentLanguage.language == Constants.english) setLocale("ar") else setLocale("en")
+        this.requireActivity().recreate()
+    }
+
 }

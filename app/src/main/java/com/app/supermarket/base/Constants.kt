@@ -1,5 +1,7 @@
 package com.app.supermarket.base
 
-class Constants {
-    val baseUrl = "https://eshoppingmarketwebhost20230217211813.azurewebsites.net/"
+object Constants {
+    const val baseUrl = "https://eshoppingmarketwebhost20230217211813.azurewebsites.net/"
+    const val arabic = "ar"
+    const val english ="en"
 }

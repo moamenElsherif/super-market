@@ -14,6 +14,16 @@
     <string name="empty_number">برجاء ادخال رقم الهاتف</string>
     <string name="empty_password">برجاء ادخال كلمه السر</string>
     <string name="empty_data">برجاء ادخال بيناتك</string>
+    <string name="empty_email">برجاء ادخال البريد الالكتروني</string>
+    <string name="invalid_email">حساب غير صحيح</string>
+    <string name="empty_name">برجاء ادخال الاسم</string>
+    <string name="invalid_data">بينات غير صحيحه</string>
+    <string name="match_password_erroe">كلمات المرور غير متطابقه</string>
+    <string name="confirm">تأكيد</string>
+
+    <string name="new_password">رقم سري جديد</string>
+    <string name="confirm_password">تاكيد الرقم السري</string>
+
 
     <string name="no_connection_error_message">Well…, there\'s no internet connection. Please, Check it and try again</string>
     <string name="client_side_error_message">We couldn\'t get what you\'re looking for. Please, try again later</string>
@@ -26,4 +36,8 @@
     <string name="register">التسجيل</string>
     <string name="email">البريد الالكتروني</string>
     <string name="name">الاسم</string>
+    <string name="cart">عربه التسوق</string>
+    <string name="home">الرئيسيه</string>
+    <string name="settings">الاعدادات</string>
+    <string name="reset_password">تغير كلمه السر</string>
 </resources>
