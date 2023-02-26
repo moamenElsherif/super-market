@@ -1,69 +1,42 @@
 package com.app.supermarket.presentation.main.home
 
-import android.annotation.SuppressLint
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.app.supermarket.R
-import com.app.supermarket.data.models.response.HomeCategoryResponse
+import com.app.supermarket.base.callback.AdapterClickListener
+import com.app.supermarket.base.callback.DiffCallback
+import com.app.supermarket.data.models.response.CategoryResponse
+import com.app.supermarket.databinding.HomeCategoryItemBinding
 
 
 class HomeCategoryAdapter(
-    private var items: HomeCategoryResponse,
-) : RecyclerView.Adapter<HomeCategoryAdapter.CourseViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CourseViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.home_category_item,
-            parent, false
-        )
-        return CourseViewHolder(itemView)
+    private val categoryClickListener: AdapterClickListener<CategoryResponse>
+) : ListAdapter<CategoryResponse, HomeCategoryAdapter.CategoryViewHolder>(DiffCallback<CategoryResponse>()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+        return CategoryViewHolder.form(parent)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun filterList(filterList: HomeCategoryResponse) {
-        items = filterList
-        notifyDataSetChanged()
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+        val category = getItem(position)
+        holder.bind(categoryClickListener, category)
     }
 
-    @SuppressLint("RtlHardcoded")
-    override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        if(position%2==0){
-            val params = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-            )
-            params.gravity = Gravity.START
-            holder.linear.layoutParams = params
+    class CategoryViewHolder(private val binding: HomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(clickListener: AdapterClickListener<CategoryResponse>, categoryResponse: CategoryResponse) {
+            binding.apply {
+                binding.categoryItem = categoryResponse
+                listener = clickListener
+                executePendingBindings()
+            }
         }
-        else{
-            val params = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-            )
-            params.gravity = Gravity.END
-            holder.linear.layoutParams = params
+
+        companion object {
+            fun form(parent: ViewGroup): CategoryViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = HomeCategoryItemBinding.inflate(layoutInflater, parent, false)
+                return CategoryViewHolder(binding)
+            }
         }
-        holder.categoryName.text = items.items[position].title
-        items.items[position].imageUrl?.toInt()?.let { holder.categoryImage.setImageResource(it) }
-    }
-
-    override fun getItemCount(): Int {
-        return items.items.size
-    }
-
-    class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // on below line we are initializing our course name text view and our image view.
-        val categoryName: TextView = itemView.findViewById(R.id.tv_category)
-        val categoryImage: ImageView = itemView.findViewById(R.id.iv_category)
-        val linear: LinearLayout = itemView.findViewById(R.id.linear)
     }
 }

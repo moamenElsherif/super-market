@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
+import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.data.models.response.CategoryResponse
-import com.app.supermarket.data.models.response.HomeCategoryResponse
 import com.app.supermarket.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -56,19 +56,24 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(){
             localizedTitle = null
         )
 
-        repeat(12){
+        repeat(12) {
             itemList.add(it ,item)
         }
 
-        val itemsTest = HomeCategoryResponse(items = itemList , totalCount = 5)
+        categoryAdapter = HomeCategoryAdapter(AdapterClickListener { category ->
 
-        categoryAdapter = HomeCategoryAdapter(itemsTest)
-        binding.rvCategory.layoutManager = GridLayoutManager(this.requireContext() ,2).apply {
-            this.isSmoothScrolling
+        })
 
+        categoryAdapter.submitList(itemList)
+
+        binding.apply {
+            rvCategory.layoutManager = GridLayoutManager(requireContext() ,2).apply {
+                this.isSmoothScrolling
+            }
+
+            rvCategory.setHasFixedSize(false)
+            rvCategory.adapter = categoryAdapter
         }
-        binding.rvCategory.setHasFixedSize(false)
-        binding.rvCategory.adapter = categoryAdapter
     }
 
 }
