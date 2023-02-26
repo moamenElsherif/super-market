@@ -12,8 +12,8 @@ import com.app.supermarket.databinding.HomeCategoryItemBinding
 
 
 class HomeCategoryAdapter(
-    private val categoryClickListener: AdapterClickListener<CategoryResponse>
-) : ListAdapter<CategoryResponse, HomeCategoryAdapter.CategoryViewHolder>(DiffCallback<CategoryResponse>()) {
+    private val categoryClickListener: AdapterClickListener<Item>
+) : ListAdapter<Item, HomeCategoryAdapter.CategoryViewHolder>(DiffCallback<Item>()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder.form(parent)
     }
@@ -24,7 +24,7 @@ class HomeCategoryAdapter(
     }
 
     class CategoryViewHolder(private val binding: HomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AdapterClickListener<CategoryResponse>, categoryResponse: CategoryResponse) {
+        fun bind(clickListener: AdapterClickListener<Item>, categoryResponse: Item) {
             binding.apply {
                 binding.categoryItem = categoryResponse
                 listener = clickListener

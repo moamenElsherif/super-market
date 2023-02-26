@@ -6,7 +6,7 @@
     <data>
         <variable
             name="categoryItem"
-            type="com.app.supermarket.data.models.response.CategoryResponse" />
+            type="com.app.supermarket.data.models.response.Item" />
 
         <variable
             name="listener"
@@ -41,7 +41,7 @@
                 android:padding="5dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="@string/password"
+                android:text="@{categoryItem.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
