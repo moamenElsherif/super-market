@@ -1,6 +1,7 @@
 package com.app.supermarket.presentation.main.home
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
+
         lifecycleScope.launchWhenResumed {
             viewModel.categoryStateFlow.collect { resource ->
                 when (resource) {
@@ -50,15 +52,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initAdapter() {
-        binding.apply {
-            rvCategory.layoutManager = GridLayoutManager(requireContext(), 2).apply {
+        binding.rvCategory.apply {
+
+            val width = resources.displayMetrics.run { widthPixels }
+            layoutManager = GridLayoutManager(requireContext(), 2).apply {
                 this.isSmoothScrolling
             }
 
-            rvCategory.setHasFixedSize(false)
-            rvCategory.adapter = categoryAdapter
+            categoryAdapter.setItemWidth(width)
 
+            setHasFixedSize(false)
+            adapter = categoryAdapter
         }
-
     }
 }
