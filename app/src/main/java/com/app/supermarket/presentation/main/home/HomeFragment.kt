@@ -1,7 +1,6 @@
 package com.app.supermarket.presentation.main.home
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +10,6 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.response.CategoryResponse
 import com.app.supermarket.data.models.response.HomeCategoryResponse
-import com.app.supermarket.data.models.response.Item
 import com.app.supermarket.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -39,6 +37,29 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(){
                         hideLoading()
                         initAdapter(resource.value.result.items)
                     }
+                }
+            }
+        }
+
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        val itemList = mutableListOf<CategoryResponse>()
+        val item = CategoryResponse(
+            null,
+            title = "FoodFoodFood",
+            imageUrl = R.drawable.user.toString(),
+            id = null,
+            description = null,
+            isActive = null,
+            localizedDescription = null,
+            localizedTitle = null
+        )
+
+        repeat(12) {
+            itemList.add(it ,item)
+        }
                     else -> {
                         hideLoading()
                     }
@@ -48,12 +69,20 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(){
     }
 
     private fun initAdapter(data: List<Item> ) {
-        categoryAdapter = HomeCategoryAdapter(data)
-        binding.rvCategory.layoutManager = GridLayoutManager(this.requireContext() ,2).apply {
-            this.isSmoothScrolling
+        categoryAdapter = HomeCategoryAdapter(AdapterClickListener { category ->
+
+        })
+
+        categoryAdapter.submitList(itemList)
+
+        binding.apply {
+            rvCategory.layoutManager = GridLayoutManager(requireContext() ,2).apply {
+                this.isSmoothScrolling
+            }
+
+            rvCategory.setHasFixedSize(false)
+            rvCategory.adapter = categoryAdapter
+
         }
-        binding.rvCategory.setHasFixedSize(false)
-        binding.rvCategory.adapter = categoryAdapter
-    }
 
 }
