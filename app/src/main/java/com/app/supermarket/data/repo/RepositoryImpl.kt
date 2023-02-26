@@ -13,15 +13,9 @@ class RepositoryImpl @Inject constructor(
     private val dataSource: DataSource
 ) : Repository {
 
-    override suspend fun login(
-        loginRequest: LoginRequest
-    ): Resource<BaseResponse<LoginResponse>> =
-        dataSource.login(loginRequest)
+    override suspend fun login(loginRequest: LoginRequest): Resource<BaseResponse<LoginResponse>> = dataSource.login(loginRequest)
 
-    override suspend fun register(
-        registerRequest: RegisterRequest
-    ): Resource<BaseResponse<RegisterResponse>> =
-        dataSource.register(registerRequest)
+    override suspend fun register(registerRequest: RegisterRequest): Resource<BaseResponse<RegisterResponse>> = dataSource.register(registerRequest)
 
 
 }

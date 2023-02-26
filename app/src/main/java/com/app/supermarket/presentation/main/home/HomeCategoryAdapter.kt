@@ -9,7 +9,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.R
 import com.app.supermarket.data.models.response.HomeCategoryResponse
@@ -29,6 +28,7 @@ class HomeCategoryAdapter(
         return CourseViewHolder(itemView)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun filterList(filterList: HomeCategoryResponse) {
         items = filterList
         notifyDataSetChanged()

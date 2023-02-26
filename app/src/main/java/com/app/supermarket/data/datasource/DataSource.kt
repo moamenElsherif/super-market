@@ -9,7 +9,7 @@ import javax.inject.Inject
 class DataSource @Inject constructor(
     private val apiService: ApiService
 ): BaseRemoteDataSource() {
-    suspend fun login(loginRequest: LoginRequest)= safeApiCall {
+    suspend fun login(loginRequest: LoginRequest) = safeApiCall {
         apiService.login(loginRequest)
     }
 
