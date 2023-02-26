@@ -22,7 +22,7 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
         android:onClick="@{() -> listener.onClick(categoryItem)}"
-        app:cardBackgroundColor="?attr/colorAccent"
+        app:cardBackgroundColor="@color/grey_white"
         app:strokeColor="@color/gray"
         app:strokeWidth="2dp">
 
