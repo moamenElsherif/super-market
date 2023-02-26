@@ -17,4 +17,5 @@ class UseCaseModule {
     fun provideLoginUseCase(
         repository: Repository
     ): LoginUseCase = LoginUseCase(repository)
+
 }

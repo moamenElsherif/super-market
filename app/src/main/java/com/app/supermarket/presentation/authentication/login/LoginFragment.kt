@@ -35,9 +35,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
     }
 
     private fun initLang() {
-        if (getCurrentLanguage.language == Constants.english) {
-            binding.tvLang.text = Constants.arabic
-        } else binding.tvLang.text = Constants.english
+        if (getCurrentLanguage.language == Constants.english) binding.tvLang.text = Constants.arabic
+        else binding.tvLang.text = Constants.english
     }
 
     private fun observeEvents() {

@@ -1,50 +1,64 @@
 package com.app.supermarket.presentation.main.home
 
 import android.os.Bundle
-import android.widget.GridLayout
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
-import com.app.supermarket.data.models.response.HomeCategoryResponse
-import com.app.supermarket.data.models.response.Item
+import com.app.supermarket.base.Resource
+import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentHomeBinding
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeFragment :BaseFragment<FragmentHomeBinding>(){
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val layoutRes: Int
         get() = R.layout.fragment_home
 
-    lateinit var categoryAdapter: HomeCategoryAdapter
+
+    private val viewModel: HomeViewModel by viewModels()
+
+    private var categoryAdapter: HomeCategoryAdapter = HomeCategoryAdapter(AdapterClickListener {
+
+    })
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
+        lifecycleScope.launchWhenResumed {
+            viewModel.categoryStateFlow.collect { resource ->
+                when (resource) {
+                    is Resource.Failure -> {
+                        hideLoading()
+                        Toast.makeText(
+                            this@HomeFragment.requireContext(),
+                            resource.failureStatus.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is Resource.Loading -> showLoading()
+                    is Resource.Success -> {
+                        hideLoading()
+                        categoryAdapter.submitList(resource.value.result.items)
+                    }
+                    else -> {}
+                }
+            }
+        }
+
     }
 
     private fun initAdapter() {
-        val itemList = mutableListOf<Item>()
-        val item = Item(
-            null,
-            title = "FoodFoodFood",
-            imageUrl = R.drawable.user.toString(),
-            id = null,
-            description = null,
-            isActive = null,
-            localizedDescription = null,
-            localizedTitle = null
-        )
-        repeat(12){
-            itemList.add(it ,item)
-        }
+        binding.apply {
+            rvCategory.layoutManager = GridLayoutManager(requireContext(), 2).apply {
+                this.isSmoothScrolling
+            }
 
-        val itemsTest = HomeCategoryResponse(items = itemList , totalCount = 5)
-        categoryAdapter = HomeCategoryAdapter(itemsTest)
-        binding.rvCategory.layoutManager = GridLayoutManager(this.requireContext() ,2).apply {
-            this.isSmoothScrolling
+            rvCategory.setHasFixedSize(false)
+            rvCategory.adapter = categoryAdapter
 
         }
-        binding.rvCategory.setHasFixedSize(false)
-        binding.rvCategory.adapter = categoryAdapter
+
     }
-
 }

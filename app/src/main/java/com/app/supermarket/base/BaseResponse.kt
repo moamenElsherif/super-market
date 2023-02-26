@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class BaseResponse<T>(
-  val data: T,
-  @SerializedName("msg")
-  val message: String,
-  val status: Int,
+  val result: T,
+  val targetUrl :String,
+  val success: Boolean,
+  val error: String,
+  val unAuthorizedRequest: Boolean,
+  val __abp: Boolean
 )

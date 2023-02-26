@@ -17,5 +17,5 @@ class RepoModule {
     @Singleton
     fun provideRepository(
         dataSource: DataSource
-    ):Repository = RepositoryImpl(dataSource)
+    ) : Repository = RepositoryImpl(dataSource)
 }
