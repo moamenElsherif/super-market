@@ -17,5 +17,8 @@ class DataSource @Inject constructor(
         apiService.register(registerRequest)
     }
 
+    suspend fun listHomeCategories() = safeApiCall {
+        apiService.listHomeCategories()
+    }
 
 }

@@ -11,11 +11,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.R
+import com.app.supermarket.data.models.response.CategoryResponse
 import com.app.supermarket.data.models.response.HomeCategoryResponse
+import com.app.supermarket.data.models.response.Item
 
 
 class HomeCategoryAdapter(
-    private var items: HomeCategoryResponse,
+    private var items: List<Item>,
 ) : RecyclerView.Adapter<HomeCategoryAdapter.CourseViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,12 +28,6 @@ class HomeCategoryAdapter(
             parent, false
         )
         return CourseViewHolder(itemView)
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun filterList(filterList: HomeCategoryResponse) {
-        items = filterList
-        notifyDataSetChanged()
     }
 
     @SuppressLint("RtlHardcoded")
@@ -52,12 +48,11 @@ class HomeCategoryAdapter(
             params.gravity = Gravity.END
             holder.linear.layoutParams = params
         }
-        holder.categoryName.text = items.items[position].title
-        items.items[position].imageUrl?.toInt()?.let { holder.categoryImage.setImageResource(it) }
+        holder.categoryName.text = items[position].title
     }
 
     override fun getItemCount(): Int {
-        return items.items.size
+        return items.size
     }
 
     class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
