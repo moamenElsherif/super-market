@@ -10,6 +10,7 @@ import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
+import com.app.supermarket.data.models.response.Item
 import com.app.supermarket.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
