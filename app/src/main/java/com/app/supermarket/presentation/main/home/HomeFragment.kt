@@ -1,7 +1,8 @@
 package com.app.supermarket.presentation.main.home
 
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +11,6 @@ import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
-import com.app.supermarket.data.models.response.Item
 import com.app.supermarket.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +28,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
+
+        binding.apply {
+            edtSearch.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {}
+
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    viewModel.searchCategories(s.toString())
+                }
+            })
+        }
 
         lifecycleScope.launchWhenResumed {
             viewModel.categoryStateFlow.collect { resource ->
@@ -50,6 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
+        viewModel.categoriesSearchResultsLiveData.observe(viewLifecycleOwner) { searchResult ->
+            categoryAdapter.submitList(searchResult)
+        }
     }
 
     private fun initAdapter() {
