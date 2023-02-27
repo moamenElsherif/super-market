@@ -7,10 +7,34 @@
 
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_products"
-        tools:context=".presentation.product.productsList.ProductListFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/product_item" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".presentation.product.productsList.ProductListFragment"
+            tools:listitem="@layout/product_item" />
+
+
+        <TextView
+            android:id="@+id/tv_empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Products Found"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

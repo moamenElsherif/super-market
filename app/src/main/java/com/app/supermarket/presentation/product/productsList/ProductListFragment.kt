@@ -2,6 +2,7 @@ package com.app.supermarket.presentation.product.productsList
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -55,6 +56,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                     is Resource.Loading -> showLoading()
                     is Resource.Success -> {
                         hideLoading()
+                        checkEmptyList(resource.value.result.items?.size)
                         productListAdapter.submitList(resource.value.result.items)
                     }
                     else -> {}
@@ -62,6 +64,17 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
             }
         }
 
+    }
+
+    private fun checkEmptyList(size: Int?) {
+        if (size==0) {
+            binding.rvProducts.visibility = View.GONE
+            binding.tvEmptyList.visibility = View.VISIBLE
+        }
+        else {
+            binding.rvProducts.visibility = View.VISIBLE
+            binding.tvEmptyList.visibility = View.GONE
+        }
     }
 
     private fun navigateToMainActivity() {
