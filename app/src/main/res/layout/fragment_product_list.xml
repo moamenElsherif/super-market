@@ -9,12 +9,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             tools:context=".presentation.product.productsList.ProductListFragment"
             tools:listitem="@layout/product_item" />
 
@@ -24,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No Products Found"
-            android:textSize="28sp"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:visibility="gone"
