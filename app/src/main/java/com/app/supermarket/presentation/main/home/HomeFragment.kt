@@ -1,5 +1,6 @@
 package com.app.supermarket.presentation.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
+import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentHomeBinding
+import com.app.supermarket.presentation.product.ProductActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,8 +25,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private var categoryAdapter: HomeCategoryAdapter = HomeCategoryAdapter(AdapterClickListener {
-
+    private var categoryAdapter: HomeCategoryAdapter = HomeCategoryAdapter(AdapterClickListener { item ->
+        navigateToProductActivity(item.id)
     })
 
     override fun initUI(savedInstanceState: Bundle?) {
@@ -66,6 +69,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.categoriesSearchResultsLiveData.observe(viewLifecycleOwner) { searchResult ->
             categoryAdapter.submitList(searchResult)
         }
+    }
+
+    private fun navigateToProductActivity(categoryId: Int) {
+        val intent = Intent(requireContext(), ProductActivity::class.java)
+        intent.putExtra(Constants.CATEGORY_ID, categoryId)
+        startActivity(intent)
     }
 
     private fun initAdapter() {

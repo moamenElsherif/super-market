@@ -19,7 +19,7 @@
         android:layout_height="120dp"
         android:layout_margin="5dp"
         android:descendantFocusability="blocksDescendants"
-        app:cardCornerRadius="10dp"
+
         app:cardElevation="0dp"
         android:onClick="@{() -> listener.onClick(categoryItem)}"
         app:cardBackgroundColor="?attr/colorAccent"

@@ -1,6 +1,7 @@
 package com.app.supermarket.domain.di
 
 import com.app.supermarket.data.repo.Repository
+import com.app.supermarket.domain.usecase.GetAllCategoryProductsUseCase
 import com.app.supermarket.domain.usecase.LoginUseCase
 import dagger.Module
 import dagger.Provides
@@ -18,4 +19,9 @@ class UseCaseModule {
         repository: Repository
     ): LoginUseCase = LoginUseCase(repository)
 
+    @Provides
+    @Singleton
+    fun provideGetAllCategoryProductsUseCase(
+        repository: Repository
+    ): GetAllCategoryProductsUseCase = GetAllCategoryProductsUseCase(repository)
 }

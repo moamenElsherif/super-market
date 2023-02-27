@@ -1,6 +1,5 @@
 package com.app.supermarket.presentation.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.app.supermarket.R
@@ -17,7 +16,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
     override val layoutRes: Int
         get() = R.layout.activity_main
 
-    lateinit var bottomNav : BottomNavigationView
+    private lateinit var bottomNav : BottomNavigationView
 
     override fun initUI(savedInstanceState: Bundle?) {
         bottomNav = binding.bottomNav
@@ -49,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
         }
     }
 
-    private  fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)
         transaction.commit()
