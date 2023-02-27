@@ -31,7 +31,7 @@ class HomeCategoryAdapter(
     class CategoryViewHolder(private val binding: HomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: AdapterClickListener<Item>, categoryResponse: Item, itemWidth: Int) {
             binding.apply {
-                cvCategoryItem.layoutParams.width = itemWidth
+//                cvCategoryItem.layoutParams.width = itemWidth
                 categoryItem = categoryResponse
                 listener = clickListener
                 executePendingBindings()
