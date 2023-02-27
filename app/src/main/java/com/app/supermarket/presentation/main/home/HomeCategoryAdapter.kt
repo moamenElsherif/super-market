@@ -16,7 +16,7 @@ class HomeCategoryAdapter(
     private var calculatedItemWidth : Int = 150
 
     fun setItemWidth(width: Int) {
-        calculatedItemWidth = (width / 2) - 15
+        calculatedItemWidth = (width / 2) - 20
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {

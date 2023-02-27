@@ -28,8 +28,7 @@
                 android:background="@drawable/search_bar_background"
                 android:gravity="center"
                 android:backgroundTint="@color/gray"
-                android:hint="Search"
-                />
+                android:hint="Search" />
 
         </FrameLayout>
 
