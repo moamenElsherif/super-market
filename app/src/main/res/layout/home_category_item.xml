@@ -39,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:textSize="18sp"
-                        android:text="@{categoryItem.title}"
+                        android:text="@{categoryItem.localizedTitle}"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"

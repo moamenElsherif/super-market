@@ -5,10 +5,7 @@ import com.app.supermarket.base.Resource
 import com.app.supermarket.data.datasource.DataSource
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
-import com.app.supermarket.data.models.response.CategoryHomeResponse
-import com.app.supermarket.data.models.response.GetAllProductResponse
-import com.app.supermarket.data.models.response.LoginResponse
-import com.app.supermarket.data.models.response.RegisterResponse
+import com.app.supermarket.data.models.response.*
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -22,5 +19,9 @@ class RepositoryImpl @Inject constructor(
     override suspend fun categoriesFlow(): Resource<BaseResponse<CategoryHomeResponse>> = dataSource.listHomeCategories()
     override suspend fun listAllProductsByCategory(categoryId: Int): Resource<BaseResponse<GetAllProductResponse>> {
         return dataSource.listAllProductsByCategory(categoryId)
+    }
+
+    override suspend fun getProduct(categoryId: Int): Resource<BaseResponse<ProductResponse>> {
+        return dataSource.getProduct(categoryId)
     }
 }

@@ -4,10 +4,7 @@ import com.app.supermarket.base.BaseResponse
 import com.app.supermarket.base.Constants
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
-import com.app.supermarket.data.models.response.CategoryHomeResponse
-import com.app.supermarket.data.models.response.GetAllProductResponse
-import com.app.supermarket.data.models.response.LoginResponse
-import com.app.supermarket.data.models.response.RegisterResponse
+import com.app.supermarket.data.models.response.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,16 +12,36 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @POST("/api/TokenAuth/AuthenticateCustomer")
+    @POST(LOGIN)
     suspend fun login(@Body request: LoginRequest): BaseResponse<LoginResponse>
 
-    @POST("/api/services/app/Account/RegisterV2")
+    @POST(REGISTER)
     suspend fun register(@Body request: RegisterRequest): BaseResponse<RegisterResponse>
 
-    @GET(Constants.GET_ALL_CATEGORIES_URL)
+    @GET(GET_ALL_CATEGORIES_URL)
     suspend fun listHomeCategories() : BaseResponse<CategoryHomeResponse>
 
-    @GET(Constants.GET_ALL_PRODUCTS_BY_CATEGORY_URL)
+    @GET(GET_ALL_PRODUCTS_BY_CATEGORY_URL)
     suspend fun listAllProductsByCategory(@Query(value = "CategoryId") categoryId: Int) : BaseResponse<GetAllProductResponse>
+
+    @GET(GET_PRODUCT)
+    suspend fun getProduct(@Query(value = "id") categoryId: Int) : BaseResponse<ProductResponse>
+
+
+
+
+    companion object {
+
+        // Get All Categories URL
+        const val GET_ALL_CATEGORIES_URL = "api/services/app/Category/GetAll"
+        // Get All Products by Category Id
+        const val GET_ALL_PRODUCTS_BY_CATEGORY_URL = "api/services/app/Product/GetAll"
+
+        const val REGISTER = "/api/services/app/Account/RegisterV2"
+
+        const val LOGIN = "/api/TokenAuth/AuthenticateCustomer"
+
+        const val GET_PRODUCT = "/api/services/app/Product/Get"
+    }
 
 }

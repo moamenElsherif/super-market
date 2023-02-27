@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.app.supermarket.presentation.product.productsList.ProductListFragment"
-        tools:layout="@layout/fragment_product_list"/>
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.app.supermarket.presentation.product.productdetails.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

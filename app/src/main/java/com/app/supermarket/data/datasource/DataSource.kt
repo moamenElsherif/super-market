@@ -24,4 +24,8 @@ class DataSource @Inject constructor(
     suspend fun listAllProductsByCategory(categoryId: Int) = safeApiCall {
         apiService.listAllProductsByCategory(categoryId)
     }
+
+    suspend fun getProduct(categoryId: Int) = safeApiCall {
+        apiService.getProduct(categoryId)
+    }
 }

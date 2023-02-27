@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
@@ -22,11 +23,9 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         get() = R.layout.fragment_product_list
 
     private val productListAdapter : ProductListAdapter = ProductListAdapter(AdapterClickListener { product ->
-        Toast.makeText(
-            this@ProductListFragment.requireContext(),
-            product.localizedName,
-            Toast.LENGTH_SHORT
-        ).show()
+        findNavController().navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
+            product.id!!
+        ))
     })
 
     private val viewModel: ProductListViewModel by viewModels()

@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,4 +18,9 @@ fun setImageUrl(image: ImageView, completeUrl: String?) {
             .apply(requestOptions)
             .into(image)
     }
+}
+
+@BindingAdapter(value = ["app:getStringFromFloat"])
+fun getStringFromFloat(textView: TextView , float: Float?): String{
+    return float.toString()
 }

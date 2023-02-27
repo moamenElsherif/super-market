@@ -2,6 +2,7 @@ package com.app.supermarket.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,10 +10,12 @@ import android.view.Window
 import android.view.WindowManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseActivity
+import com.app.supermarket.base.Constants
 import com.app.supermarket.databinding.ActivitySplashBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import com.app.supermarket.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
@@ -22,6 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         initSplashScreen()
+        setLocale("ar")
     }
 
     private fun initSplashScreen() {
@@ -32,6 +36,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         Handler(Looper.getMainLooper()).postDelayed({
             openMain()
         }, 3000)
+    }
+
+    fun setLocale(lang: String?) {
+        val locale = lang?.let { Locale(it) }
+        if (locale != null) {
+            Locale.setDefault(locale)
+        }
+        val config = Configuration()
+        config.locale = locale
+        this.resources?.updateConfiguration(
+            config,
+            this.resources?.displayMetrics
+        )
     }
 
 
