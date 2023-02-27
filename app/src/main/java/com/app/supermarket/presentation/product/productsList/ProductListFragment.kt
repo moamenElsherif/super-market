@@ -22,11 +22,16 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     override val layoutRes: Int
         get() = R.layout.fragment_product_list
 
-    private val productListAdapter : ProductListAdapter = ProductListAdapter(AdapterClickListener { product ->
-        findNavController().navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
-            product.id!!
-        ))
-    })
+    private var categoryName: String = ""
+
+    private val productListAdapter: ProductListAdapter =
+        ProductListAdapter(AdapterClickListener { product ->
+            findNavController().navigate(
+                ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
+                    product.id!! , categoryName
+                )
+            )
+        })
 
     private val viewModel: ProductListViewModel by viewModels()
 
@@ -38,9 +43,18 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         if (extras == null) navigateToMainActivity()
 
         val categoryId = extras!!.getInt(Constants.CATEGORY_ID)
+        categoryName = extras.getString(Constants.CATEGORY_NAME).toString()
+        binding.tvTitle.text = categoryName
+        getCategoryList(categoryId)
 
+    }
+
+    private fun getCategoryList(categoryId: Int) {
         viewModel.getAllCategoryProductsById(categoryId)
+        observeResponse()
+    }
 
+    private fun observeResponse() {
         lifecycleScope.launchWhenResumed {
             viewModel.productsStateFlow.collect { resource ->
                 when (resource) {
@@ -62,15 +76,13 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                 }
             }
         }
-
     }
 
     private fun checkEmptyList(size: Int?) {
-        if (size==0) {
+        if (size == 0) {
             binding.rvProducts.visibility = View.GONE
             binding.tvEmptyList.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             binding.rvProducts.visibility = View.VISIBLE
             binding.tvEmptyList.visibility = View.GONE
         }

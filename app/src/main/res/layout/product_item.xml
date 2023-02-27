@@ -23,7 +23,7 @@
         android:onClick="@{() -> listener.onClick(productItem)}"
         app:strokeColor="@color/black"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/gray"
+        app:cardBackgroundColor="#f0fff0"
         app:strokeWidth="2dp">
 
         <LinearLayout

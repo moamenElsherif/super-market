@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: HomeViewModel by viewModels()
 
     private var categoryAdapter: HomeCategoryAdapter = HomeCategoryAdapter(AdapterClickListener { item ->
-        navigateToProductActivity(item.id)
+        navigateToProductActivity(item.id , item.localizedTitle)
     })
 
     override fun initUI(savedInstanceState: Bundle?) {
@@ -71,9 +71,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun navigateToProductActivity(categoryId: Int) {
+    private fun navigateToProductActivity(categoryId: Int , categoryName: String) {
         val intent = Intent(requireContext(), ProductActivity::class.java)
         intent.putExtra(Constants.CATEGORY_ID, categoryId)
+        intent.putExtra(Constants.CATEGORY_NAME , categoryName)
         startActivity(intent)
     }
 

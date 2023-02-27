@@ -30,7 +30,7 @@ class ProductListAdapter(
     class ProductViewHolder(private val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: AdapterClickListener<ProductResponse>, productResponse: ProductResponse, itemWidth: Int) {
             binding.apply {
-                cvProductCard.layoutParams.width = itemWidth
+//                cvProductCard.layoutParams.width = itemWidth
                 productItem = productResponse
                 listener = clickListener
                 executePendingBindings()
