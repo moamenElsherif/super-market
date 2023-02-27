@@ -41,6 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             })
         }
+
         lifecycleScope.launchWhenResumed {
             viewModel.categoryStateFlow.collect { resource ->
                 when (resource) {
@@ -62,11 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-
-        viewModel.categoriesLiveData.observe(viewLifecycleOwner) { data ->
-            categoryAdapter.submitList(data)
+        viewModel.categoriesSearchResultsLiveData.observe(viewLifecycleOwner) { searchResult ->
+            categoryAdapter.submitList(searchResult)
         }
-
     }
 
     private fun initAdapter() {
