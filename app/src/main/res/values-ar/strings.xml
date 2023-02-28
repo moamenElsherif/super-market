@@ -41,4 +41,7 @@
     <string name="settings">الاعدادات</string>
     <string name="reset_password">تغير كلمه السر</string>
     <string name="product_image">Product Image</string>
+    <string name="description">الوصف</string>
+    <string name="no_products_found">لا يوجد منتجات</string>
+    <string name="eg">ج.م</string>
 </resources>
