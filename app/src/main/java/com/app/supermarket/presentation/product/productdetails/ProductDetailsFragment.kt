@@ -108,8 +108,11 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
         handleMinusClick()
     }
 
-    override fun clickCheckOut() {
-        TODO("Not yet implemented")
+    override fun clickOpenCart() {
+    }
+
+    override fun clickAddToCart() {
+        Toast.makeText(this.requireContext(), "add item to Cart", Toast.LENGTH_SHORT).show()
     }
 
     private fun handlePlusClick() {

@@ -44,4 +44,8 @@
     <string name="description">الوصف</string>
     <string name="no_products_found">لا يوجد منتجات</string>
     <string name="eg">ج.م</string>
+    <string name="search">بحث</string>
+    <string name="checkout">Checkout</string>
+    <string name="icon_back">Icon Back</string>
+    <string name="add_to_cart">أضف الي السله</string>
 </resources>

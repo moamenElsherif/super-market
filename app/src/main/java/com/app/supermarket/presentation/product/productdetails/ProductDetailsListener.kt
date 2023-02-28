@@ -5,5 +5,6 @@ interface ProductDetailsListener {
     fun clickCart()
     fun clickPlus()
     fun clickMinus()
-    fun clickCheckOut()
+    fun clickOpenCart()
+    fun clickAddToCart()
 }

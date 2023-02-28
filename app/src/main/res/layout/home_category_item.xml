@@ -21,10 +21,10 @@
         android:layout_gravity="center"
         app:cardCornerRadius="7dp"
         android:layout_margin="8dp"
+        app:strokeColor="@color/orange"
         android:descendantFocusability="blocksDescendants"
         android:onClick="@{() -> listener.onClick(categoryItem)}"
-        app:cardBackgroundColor="@color/linen_color"
-        app:strokeColor="@color/gray"
+        app:cardBackgroundColor="@color/white_smoke"
         app:strokeWidth="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,9 +42,12 @@
                 android:text="@{categoryItem.localizedTitle}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:textAlignment="center"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_category"
                 tools:text="@string/confirm" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -54,10 +57,9 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="5dp"
                 app:imageUrl="@{categoryItem.imageUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_category"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/user" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

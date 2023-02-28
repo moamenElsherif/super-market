@@ -48,4 +48,5 @@
     <string name="search">Search</string>
     <string name="checkout">Checkout</string>
     <string name="icon_back">Icon Back</string>
+    <string name="add_to_cart">Add To Cart</string>
 </resources>
