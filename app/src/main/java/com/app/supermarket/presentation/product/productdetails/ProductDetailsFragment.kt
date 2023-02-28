@@ -1,12 +1,10 @@
 package com.app.supermarket.presentation.product.productdetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,13 +13,13 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.response.ProductResponse
 import com.app.supermarket.databinding.FragmentProductDetailsBinding
-import com.app.supermarket.databinding.FragmentProductListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProductDetailsFragment :BaseFragment<FragmentProductDetailsBinding>() {
+class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
+    ProductDetailsListener {
     override val layoutRes: Int
         get() = R.layout.fragment_product_details
 
@@ -29,10 +27,21 @@ class ProductDetailsFragment :BaseFragment<FragmentProductDetailsBinding>() {
     private val viewModel: ProductDetailsViewModel by viewModels()
     private var productDetailsUiState: ProductDetailsUiState? = null
 
+    private val productCount = MutableLiveData<Int>(1)
+
+
     override fun initUI(savedInstanceState: Bundle?) {
         viewModel.getProducts(args.productId)
+        binding.listener = this
         observeUiState()
+        observeItemCount()
         handleBackPress()
+    }
+
+    private fun observeItemCount() {
+        productCount?.observe(this) {
+            binding.productCount.text = it.toString()
+        }
     }
 
     private fun handleBackPress() {
@@ -47,15 +56,16 @@ class ProductDetailsFragment :BaseFragment<FragmentProductDetailsBinding>() {
 
     private fun observeUiState() {
         lifecycleScope.launch {
-            viewModel.productResponse.collectLatest { resource->
-                when(resource){
-                     is Resource.Loading -> showLoading()
-                     is Resource.Success -> {
+            viewModel.productResponse.collectLatest { resource ->
+                when (resource) {
+                    is Resource.Loading -> showLoading()
+                    is Resource.Success -> {
                         hideLoading()
                         productDetailsUiState = getUiState(resource.value.result)
                         binding.productItem = productDetailsUiState
+                        productCount.value = productDetailsUiState?.minCounter!!
                     }
-                    is Resource.Failure ->{
+                    is Resource.Failure -> {
 
                     }
                     else -> {}
@@ -71,7 +81,7 @@ class ProductDetailsFragment :BaseFragment<FragmentProductDetailsBinding>() {
             price = it.price,
             priceAfterDiscount = it.priceAfterDiscount,
             minCounter = it.minCounter,
-            maxCounter =  it.maxCounter,
+            maxCounter = it.maxCounter,
             imageUrl = it.imageUrl,
             localizedName = it.localizedName,
             description = it.description,
@@ -80,5 +90,37 @@ class ProductDetailsFragment :BaseFragment<FragmentProductDetailsBinding>() {
             categoryId = it.categoryId,
             stockCount = it.stockCount
         )
+    }
+
+    override fun clickBack() {
+        findNavController().popBackStack()
+    }
+
+    override fun clickCart() {
+        Toast.makeText(this.requireContext(), "open cart", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun clickPlus() {
+        handlePlusClick()
+    }
+
+    override fun clickMinus() {
+        handleMinusClick()
+    }
+
+    override fun clickCheckOut() {
+        TODO("Not yet implemented")
+    }
+
+    private fun handlePlusClick() {
+        if (productCount.value != productDetailsUiState?.maxCounter) {
+            productCount.value = productCount.value!! + 1
+        }
+    }
+
+    private fun handleMinusClick() {
+        if (productCount.value != productDetailsUiState?.minCounter) {
+            productCount.value = productCount.value!! - 1
+        }
     }
 }
