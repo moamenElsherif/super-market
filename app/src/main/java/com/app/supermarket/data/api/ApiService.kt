@@ -1,7 +1,6 @@
 package com.app.supermarket.data.api
 
 import com.app.supermarket.base.BaseResponse
-import com.app.supermarket.base.Constants
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
 import com.app.supermarket.data.models.response.*
@@ -24,16 +23,19 @@ interface ApiService {
     @GET(GET_ALL_PRODUCTS_BY_CATEGORY_URL)
     suspend fun listAllProductsByCategory(@Query(value = "CategoryId") categoryId: Int) : BaseResponse<GetAllProductResponse>
 
+    @GET(GET_USER_CART_ITEMS_URL)
+    suspend fun listAllUserCartProducts() : BaseResponse<AllCartItemsResponse>
+
     @GET(GET_PRODUCT)
     suspend fun getProduct(@Query(value = "id") categoryId: Int) : BaseResponse<ProductResponse>
-
-
 
 
     companion object {
 
         // Get All Categories URL
         const val GET_ALL_CATEGORIES_URL = "api/services/app/Category/GetAll"
+
+        const val GET_USER_CART_ITEMS_URL = "api/services/app/Cart/GetAll"
         // Get All Products by Category Id
         const val GET_ALL_PRODUCTS_BY_CATEGORY_URL = "api/services/app/Product/GetAll"
 

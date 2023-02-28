@@ -24,4 +24,8 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getProduct(categoryId: Int): Resource<BaseResponse<ProductResponse>> {
         return dataSource.getProduct(categoryId)
     }
+
+    override suspend fun listAllUserCartProducts(): Resource<BaseResponse<AllCartItemsResponse>> {
+        return dataSource.listAllUserCartProducts()
+    }
 }
