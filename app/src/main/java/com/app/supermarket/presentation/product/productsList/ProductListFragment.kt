@@ -2,6 +2,8 @@ package com.app.supermarket.presentation.product.productsList
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -10,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
-import com.app.supermarket.base.Constants
+import com.app.supermarket.base.Constants.SWIPE_REFRESH_TIME
+import com.app.supermarket.base.Constants.CATEGORY_NAME
+import com.app.supermarket.base.Constants.CATEGORY_ID
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentProductListBinding
@@ -42,8 +46,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         // if extras is null then return back to main activity
         if (extras == null) navigateToMainActivity()
 
-        val categoryId = extras!!.getInt(Constants.CATEGORY_ID)
-        categoryName = extras.getString(Constants.CATEGORY_NAME).toString()
+        val categoryId = extras!!.getInt(CATEGORY_ID)
+        categoryName = extras.getString(CATEGORY_NAME).toString()
+
+        initSwipeRefreshListener(categoryId)
 
         binding.tvTitle.text = categoryName
         getCategoryList(categoryId)
@@ -53,6 +59,17 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     private fun getCategoryList(categoryId: Int) {
         viewModel.getAllCategoryProductsById(categoryId)
         observeResponse()
+    }
+
+    private fun initSwipeRefreshListener(categoryId: Int) {
+        binding.apply {
+            swipeRefreshLayoutProducts.setOnRefreshListener {
+                viewModel.getAllCategoryProductsById(categoryId)
+                Handler(Looper.myLooper()!!).postDelayed({
+                    swipeRefreshLayoutProducts.isRefreshing = false
+                }, SWIPE_REFRESH_TIME)
+            }
+        }
     }
 
     private fun observeResponse() {

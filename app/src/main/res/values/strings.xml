@@ -43,4 +43,5 @@
     <string name="reset_password">Reset Password</string>
     <string name="product_image">Product Image</string>
     <string name="no_products_found">No Products Found!</string>
+    <string name="search">Search</string>
 </resources>

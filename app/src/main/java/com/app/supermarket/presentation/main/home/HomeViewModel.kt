@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
      * this function list all the categories
      * into the [_categoriesLiveData] list which is a [List] of [Item]
      * */
-    private fun getAllCategory(){
+    fun getAllCategory(){
         viewModelScope.launch {
             categoryUseCase().collectLatest { resource ->
                 _categoryStateFlow.value = resource

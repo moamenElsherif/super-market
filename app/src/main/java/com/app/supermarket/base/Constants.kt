@@ -9,4 +9,8 @@ object Constants {
     const val CATEGORY_ID ="CATEGORY_ID"
     const val CATEGORY_NAME ="CATEGORY_NAME"
 
+
+    // Swipe Refresh Time
+    const val SWIPE_REFRESH_TIME = 2_000L
+
 }

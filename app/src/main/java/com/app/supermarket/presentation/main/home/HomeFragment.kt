@@ -2,6 +2,8 @@ package com.app.supermarket.presentation.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
@@ -10,7 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
-import com.app.supermarket.base.Constants
+import com.app.supermarket.base.Constants.SWIPE_REFRESH_TIME
+import com.app.supermarket.base.Constants.CATEGORY_NAME
+import com.app.supermarket.base.Constants.CATEGORY_ID
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentHomeBinding
@@ -31,14 +35,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
-
+        initSwipeRefresherListener()
         binding.apply {
             edtSearch.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {}
-
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                }
-
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     viewModel.searchCategories(s.toString())
                 }
@@ -73,11 +74,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun navigateToProductActivity(categoryId: Int , categoryName: String) {
         val intent = Intent(requireContext(), ProductActivity::class.java)
-        intent.putExtra(Constants.CATEGORY_ID, categoryId)
-        intent.putExtra(Constants.CATEGORY_NAME , categoryName)
+        intent.putExtra(CATEGORY_ID, categoryId)
+        intent.putExtra(CATEGORY_NAME , categoryName)
         startActivity(intent)
     }
 
+    private fun initSwipeRefresherListener() {
+        binding.apply {
+            swipeRefreshLayoutCategories.setOnRefreshListener {
+                viewModel.getAllCategory()
+                Handler(Looper.myLooper()!!).postDelayed({
+                    swipeRefreshLayoutCategories.isRefreshing = false
+                }, SWIPE_REFRESH_TIME)
+            }
+        }
+    }
     private fun initAdapter() {
         binding.rvCategory.apply {
 
@@ -92,4 +103,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             adapter = categoryAdapter
         }
     }
+
 }
