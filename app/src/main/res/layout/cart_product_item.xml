@@ -37,16 +37,55 @@
                 app:imageUrl="@{item.productResponse.imageUrl}"
                 android:contentDescription="TODO" />
 
-            <TextView
-                android:id="@+id/tvProductName"
-                style="@style/TextAppearance.Material3.TitleMedium"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.productResponse.localizedName}"
-                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
                 app:layout_constraintStart_toEndOf="@+id/ivProductImage"
-                app:layout_constraintTop_toTopOf="@+id/ivProductImage"
-                tools:text="Product Name" />
+                app:layout_constraintTop_toTopOf="@+id/ivProductImage">
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewStart"
+                    android:text="@{item.productResponse.localizedName}"
+                    app:layout_constraintStart_toEndOf="@+id/ivProductImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivProductImage"
+                    tools:text="Product Name" />
+
+                <TextView
+                    android:id="@+id/tvProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:maxLines="3"
+                    android:paddingVertical="5dp"
+                    android:text="@{item.productResponse.localizedDescription}"
+                    android:textAlignment="viewStart"
+                    app:layout_constraintBottom_toTopOf="@+id/tvProductPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/ibRemove"
+                    app:layout_constraintStart_toStartOf="@+id/tvProductName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                    tools:text="Some product item descreptio like price" />
+
+                <TextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(item.totalPriceAfterDiscount)}"
+                    android:textStyle="bold"
+                    android:textAlignment="viewStart"
+                    android:paddingVertical="3dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvProductDescription"
+                    tools:text="20 EGP" />
+            </LinearLayout>
+
 
             <ImageButton
                 android:id="@+id/ibRemove"
@@ -55,32 +94,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@color/off_white"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/settings" />
-
-            <TextView
-                android:id="@+id/tvProductDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="3"
-                android:text="@{item.productResponse.localizedDescription}"
-                app:layout_constraintEnd_toStartOf="@+id/ibRemove"
-                app:layout_constraintStart_toStartOf="@+id/tvProductName"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-                tools:text="Some product item descreptio like price" />
-
-            <TextView
-                android:id="@+id/tvProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="20 EGP"
-                android:text="@{String.valueOf(item.totalPriceAfterDiscount)}"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
-                app:layout_constraintStart_toStartOf="@+id/tvProductDescription" />
+                app:srcCompat="@drawable/delete" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
