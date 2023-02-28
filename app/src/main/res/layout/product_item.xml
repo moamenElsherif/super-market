@@ -21,9 +21,9 @@
         android:layout_margin="5dp"
         app:cardElevation="0dp"
         android:onClick="@{() -> listener.onClick(productItem)}"
-        app:strokeColor="@color/black"
+        app:strokeColor="@color/orange"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#f0fff0"
+        app:cardBackgroundColor="@color/white_smoke"
         app:strokeWidth="2dp">
 
         <LinearLayout
