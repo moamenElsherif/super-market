@@ -13,11 +13,7 @@ import com.app.supermarket.databinding.HomeCategoryItemBinding
 class HomeCategoryAdapter(
     private val categoryClickListener: AdapterClickListener<Item>
 ) : ListAdapter<Item, HomeCategoryAdapter.CategoryViewHolder>(DiffCallback<Item>()) {
-    private var calculatedItemWidth : Int = 150
 
-    fun setItemWidth(width: Int) {
-        calculatedItemWidth = (width / 2) - 20
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder.form(parent)
@@ -25,11 +21,11 @@ class HomeCategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = getItem(position)
-        holder.bind(categoryClickListener, category, calculatedItemWidth)
+        holder.bind(categoryClickListener, category)
     }
 
     class CategoryViewHolder(private val binding: HomeCategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AdapterClickListener<Item>, categoryResponse: Item, itemWidth: Int) {
+        fun bind(clickListener: AdapterClickListener<Item>, categoryResponse: Item) {
             binding.apply {
                 categoryItem = categoryResponse
                 listener = clickListener

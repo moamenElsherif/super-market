@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     else -> {}
                 }
             }
+
         }
 
         viewModel.categoriesSearchResultsLiveData.observe(viewLifecycleOwner) { searchResult ->
@@ -92,12 +93,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun initAdapter() {
         binding.rvCategory.apply {
 
-            val width = resources.displayMetrics.run { widthPixels }
             layoutManager = GridLayoutManager(requireContext(), 2).apply {
                 this.isSmoothScrolling
             }
-
-            categoryAdapter.setItemWidth(width)
 
             setHasFixedSize(false)
             adapter = categoryAdapter
