@@ -31,14 +31,13 @@
 
             <TextView
                 android:id="@+id/tvProductName"
+                style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                tools:text="Product Name"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivProductImage"
-                app:layout_constraintTop_toTopOf="@+id/ivProductImage" />
+                app:layout_constraintTop_toTopOf="@+id/ivProductImage"
+                tools:text="Product Name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
