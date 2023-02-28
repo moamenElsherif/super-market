@@ -12,11 +12,7 @@ import com.app.supermarket.databinding.ProductItemBinding
 class ProductListAdapter(
     private val categoryClickListener: AdapterClickListener<ProductResponse>
 ) : ListAdapter<ProductResponse, ProductListAdapter.ProductViewHolder>(DiffCallback<ProductResponse>()) {
-    private var calculatedItemWidth : Int = 150
 
-    fun setItemWidth(width: Int) {
-        calculatedItemWidth = (width / 2) - 20
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder.form(parent)
@@ -24,13 +20,12 @@ class ProductListAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
-        holder.bind(categoryClickListener, product, calculatedItemWidth)
+        holder.bind(categoryClickListener, product)
     }
 
     class ProductViewHolder(private val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AdapterClickListener<ProductResponse>, productResponse: ProductResponse, itemWidth: Int) {
+        fun bind(clickListener: AdapterClickListener<ProductResponse>, productResponse: ProductResponse) {
             binding.apply {
-//                cvProductCard.layoutParams.width = itemWidth
                 productItem = productResponse
                 listener = clickListener
                 executePendingBindings()

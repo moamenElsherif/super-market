@@ -115,14 +115,9 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     private fun initAdapter() {
         binding.rvProducts.apply {
 
-            // get screen width
-            val width = resources.displayMetrics.run { widthPixels }
-
             layoutManager = GridLayoutManager(requireContext(), 2).apply {
                 this.isSmoothScrolling
             }
-
-            productListAdapter.setItemWidth(width)
 
             setHasFixedSize(false)
             adapter = productListAdapter
