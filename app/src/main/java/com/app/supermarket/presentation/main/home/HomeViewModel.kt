@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.supermarket.base.BaseResponse
+import com.app.supermarket.base.Constants.arabic
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.response.CategoryHomeResponse
 import com.app.supermarket.data.models.response.Item
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -60,7 +62,9 @@ class HomeViewModel @Inject constructor(
         val itemName = value.lowercase()
         val data = categoriesLiveData.value ?: emptyList()
         val searchResult = data.filter { item ->
-            item.title.lowercase().contains(itemName)
+            val isFound = if (Locale.getDefault().language == arabic) item.localizedTitle.lowercase().contains(itemName)
+            else item.title.lowercase().contains(itemName)
+            isFound
         }
         _categoriesSearchResultsLiveData.value = searchResult
     }

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.base.callback.DiffCallback
 import com.app.supermarket.data.models.response.CartItemResponse
 import com.app.supermarket.databinding.CartProductItemBinding
-import com.app.supermarket.presentation.product.productdetails.ProductDetailsListener
 
 class CartItemAdapter : ListAdapter<CartItemResponse, CartItemAdapter.CartItemViewHolder>(DiffCallback<CartItemResponse>()) {
 
