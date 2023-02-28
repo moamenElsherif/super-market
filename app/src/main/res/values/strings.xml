@@ -44,4 +44,6 @@
     <string name="product_image">Product Image</string>
     <string name="no_products_found">No Products Found!</string>
     <string name="search">Search</string>
+    <string name="checkout">Checkout</string>
+    <string name="icon_back">Icon Back</string>
 </resources>
