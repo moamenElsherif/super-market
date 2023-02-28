@@ -44,6 +44,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
 
         val categoryId = extras!!.getInt(Constants.CATEGORY_ID)
         categoryName = extras.getString(Constants.CATEGORY_NAME).toString()
+
         binding.tvTitle.text = categoryName
         getCategoryList(categoryId)
 

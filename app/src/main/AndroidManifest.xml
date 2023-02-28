@@ -25,6 +25,7 @@
             android:name=".presentation.authentication.AuthenticationActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".presentation.splash.SplashActivity"
             android:exported="true"

@@ -6,11 +6,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Window
 import android.view.WindowManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseActivity
-import com.app.supermarket.base.Constants
 import com.app.supermarket.databinding.ActivitySplashBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import com.app.supermarket.presentation.main.MainActivity
@@ -20,6 +18,7 @@ import java.util.Locale
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
+
     override val layoutRes: Int
         get() = R.layout.activity_splash
 
@@ -33,12 +32,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
         Handler(Looper.getMainLooper()).postDelayed({
             openMain()
         }, 3000)
     }
 
-    fun setLocale(lang: String?) {
+    private fun setLocale(lang: String?) {
         val locale = lang?.let { Locale(it) }
         if (locale != null) {
             Locale.setDefault(locale)

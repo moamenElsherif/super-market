@@ -19,7 +19,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:padding="8dp">
+            android:background="?attr/colorPrimary"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="32dp">
 
             <EditText
                 android:id="@+id/edtSearch"
@@ -27,8 +29,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/search_bar_background"
                 android:gravity="center"
-                android:backgroundTint="@color/gray"
-                android:hint="Search" />
+                android:backgroundTint="@color/white"
+                android:hint="ابحث" />
 
         </FrameLayout>
 
