@@ -15,4 +15,9 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.SplashScreen" parent="Theme.SuperMarket">
+        <item name="android:statusBarColor">?attr/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
