@@ -1,9 +1,11 @@
 package com.app.supermarket.domain.di
 
+import com.app.supermarket.base.SharedPrefHelper
 import com.app.supermarket.data.repo.Repository
 import com.app.supermarket.domain.usecase.GetAllCategoryProductsUseCase
 import com.app.supermarket.domain.usecase.ListAllUserCartItemsUseCase
 import com.app.supermarket.domain.usecase.LoginUseCase
+import com.app.supermarket.domain.usecase.SaveAuthTokenUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +19,9 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideLoginUseCase(
-        repository: Repository
-    ): LoginUseCase = LoginUseCase(repository)
+        repository: Repository,
+        saveAuthTokenUseCase: SaveAuthTokenUseCase
+    ): LoginUseCase = LoginUseCase(repository, saveAuthTokenUseCase)
 
     @Provides
     @Singleton
@@ -31,4 +34,10 @@ class UseCaseModule {
     fun provideListAllUserCartItemsUseCase(
         repository: Repository
     ): ListAllUserCartItemsUseCase = ListAllUserCartItemsUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideSaveAuthTokenUseCase(
+        sharedPrefHelper: SharedPrefHelper
+    ): SaveAuthTokenUseCase = SaveAuthTokenUseCase(sharedPrefHelper)
 }

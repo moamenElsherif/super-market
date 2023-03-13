@@ -12,12 +12,18 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
-    private val repo: Repository
+    private val repo: Repository,
+    private val saveAuthTokenUseCase: SaveAuthTokenUseCase
 ) {
 
     operator fun invoke(loginRequest: LoginRequest): Flow<Resource<BaseResponse<LoginResponse>>> =
         flow {
             emit(Resource.Loading)
-            emit(repo.login(loginRequest))
+            val resource = repo.login(loginRequest)
+            if (resource is Resource.Success) {
+                val loginResponse : LoginResponse = resource.value.result
+                saveAuthTokenUseCase(loginResponse)
+            }
+            emit(resource)
         }.flowOn(Dispatchers.IO)
 }
