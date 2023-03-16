@@ -35,13 +35,12 @@ object RetrofitModule {
         val userToken = ""
 
         Interceptor { chain ->
-            Timber.tag("provideHeadersInterceptor").e("provideHeadersInterceptor: $userToken")
             chain.proceed(
                 chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer $userToken")
-                    .addHeader("Accept", "application/json")
-                    .addHeader("lang", Locale.getDefault().language)
-                    .addHeader("version", BuildConfig.VERSION_CODE.toString())
+                    .addHeader("accept", "text/plain")
+                    .addHeader("Content-Type",  "application/json-patch+json")
+                    .addHeader("Authorization", "")
+                    .addHeader("X-XSRF-TOKEN", userToken)
                     .build()
             )
         }

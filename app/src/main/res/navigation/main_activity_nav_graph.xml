@@ -14,6 +14,6 @@
         android:layout="@layout/fragment_cart"/>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.app.supermarket.presentation.main.settings.SettingsFragment"
-        android:layout="@layout/fragment_settings" />
+        android:name="com.app.supermarket.presentation.main.settings.ProfileFragment"
+        android:layout="@layout/fragment_profile" />
 </navigation>

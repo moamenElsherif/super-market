@@ -45,7 +45,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() ,RegisterListen
                     }
                     is Resource.Success -> {
                         hideLoading()
-                        openMainActivity()
+                        if (it.value.result.canLogin) openMainActivity()
                     }
                     is Resource.Failure -> {
                         hideLoading()

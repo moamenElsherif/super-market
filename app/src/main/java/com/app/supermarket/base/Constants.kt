@@ -1,7 +1,7 @@
 package com.app.supermarket.base
 
 object Constants {
-    const val baseUrl = "https://eshoppingmarketwebhost20230217211813.azurewebsites.net/"
+    const val baseUrl = "http://emawadsw-001-site3.atempurl.com/"
     const val arabic = "ar"
     const val english ="en"
 

@@ -13,6 +13,7 @@ import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.databinding.FragmentLoginBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
+import com.app.supermarket.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -69,7 +70,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
                     }
                     is Resource.Success -> {
                         hideLoading()
-                        createToast(R.string.login)
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -81,6 +81,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
                 }
             }
         }
+    }
+
+    private fun startMain(){
+        val intent = Intent(this.requireActivity() , MainActivity::class.java)
+        startActivity(intent)
+        this.requireActivity().finish()
     }
 
     override fun clickLogin() {

@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //        )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            openMain()
+            openAuth()
         }, 3000)
     }
 
