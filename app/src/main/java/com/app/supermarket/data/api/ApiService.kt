@@ -39,11 +39,11 @@ interface ApiService {
         // Get All Products by Category Id
         const val GET_ALL_PRODUCTS_BY_CATEGORY_URL = "api/services/app/Product/GetAll"
 
-        const val REGISTER = "/api/services/app/Account/RegisterV2"
+        const val REGISTER = "api/services/app/Account/RegisterV2"
 
-        const val LOGIN = "/api/TokenAuth/AuthenticateCustomer"
+        const val LOGIN = "api/TokenAuth/AuthenticateCustomer"
 
-        const val GET_PRODUCT = "/api/services/app/Product/Get"
+        const val GET_PRODUCT = "api/services/app/Product/Get"
     }
 
 }
