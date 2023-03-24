@@ -2,8 +2,6 @@ package com.app.supermarket.presentation.authentication.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -12,10 +10,9 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.databinding.FragmentLoginBinding
-import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import com.app.supermarket.presentation.main.MainActivity
+import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -70,6 +67,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
                     }
                     is Resource.Success -> {
                         hideLoading()
+                        createToast(R.string.login)
+                        openMain()
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -83,10 +82,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
         }
     }
 
-    private fun startMain(){
-        val intent = Intent(this.requireActivity() , MainActivity::class.java)
+    private fun openMain(){
+        val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
-        this.requireActivity().finish()
+        requireActivity().finish()
     }
 
     override fun clickLogin() {
