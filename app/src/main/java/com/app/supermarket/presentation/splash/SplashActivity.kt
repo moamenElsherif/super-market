@@ -6,14 +6,13 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseActivity
 import com.app.supermarket.databinding.ActivitySplashBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
 import com.app.supermarket.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
+import java.util.*
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
@@ -34,7 +33,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //        )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            openAuth()
+            openMain()
         }, 3000)
     }
 

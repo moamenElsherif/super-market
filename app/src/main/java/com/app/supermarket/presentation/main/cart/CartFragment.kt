@@ -25,7 +25,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         val cartItems : MutableList<CartItemResponse> = mutableListOf()
 
         repeat(10) {
-            val product = ProductResponse(1, localizedName = "Rice", true, 10, "Empty", "Empty",1, 10.0F, 20.0F, 10, 15, "https://www.world-grain.com/ext/resources/2022/10/25/Rice_AdobeStock_64819529_E.jpg?height=667&t=1666706505&width=1080", 1)
+            val product = ProductResponse(1, localizedName = "رز", "Rice", true, 10, "Empty", "Empty",1, 10.0F, 20.0F, 10, 15, "https://www.world-grain.com/ext/resources/2022/10/25/Rice_AdobeStock_64819529_E.jpg?height=667&t=1666706505&width=1080", 1)
             cartItems.add(CartItemResponse(1, 20.0F, 18.0F, 1, 15, product))
         }
 

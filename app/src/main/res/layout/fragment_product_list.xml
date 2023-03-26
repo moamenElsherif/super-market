@@ -19,19 +19,43 @@
             android:padding="10dp"
             android:textSize="24sp"
             android:textColor="@color/black"
+            android:background="?attr/colorPrimary"
             android:textAlignment="center"
-            tools:text=" category Title"
+            tools:text="category Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayoutProducts"
+        <FrameLayout
+            android:id="@+id/flSearchBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:background="?attr/colorPrimary"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+            <EditText
+                android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/search_bar_background"
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:hint="@string/search" />
+
+        </FrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayoutProducts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flSearchBar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_products"
