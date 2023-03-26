@@ -1,6 +1,7 @@
 package com.app.supermarket.domain.di
 
-import com.app.supermarket.base.SharedPrefHelper
+import com.app.supermarket.base.AuthPreference
+import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.data.repo.Repository
 import com.app.supermarket.domain.usecase.GetAllCategoryProductsUseCase
 import com.app.supermarket.domain.usecase.ListAllUserCartItemsUseCase
@@ -38,6 +39,6 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideSaveAuthTokenUseCase(
-        sharedPrefHelper: SharedPrefHelper
-    ): SaveAuthTokenUseCase = SaveAuthTokenUseCase(sharedPrefHelper)
+        authPreference: Auth
+    ): SaveAuthTokenUseCase = SaveAuthTokenUseCase(authPreference)
 }

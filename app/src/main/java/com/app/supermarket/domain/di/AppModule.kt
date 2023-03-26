@@ -1,7 +1,7 @@
 package com.app.supermarket.domain.di
 
 import android.content.Context
-import com.app.supermarket.base.SharedPrefHelper
+import com.app.supermarket.base.AuthPreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +19,5 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSharedPrefHelper(context: Context) : SharedPrefHelper = SharedPrefHelper(context)
+    fun provideSharedPrefHelper(context: Context) : AuthPreference = AuthPreference(context)
 }

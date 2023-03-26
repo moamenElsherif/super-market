@@ -5,7 +5,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseActivity
-import com.app.supermarket.base.SharedPrefHelper
+import com.app.supermarket.base.AuthPreference
+import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -21,7 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
     }
 
     @Inject
-    lateinit var sharedPrefHelper : SharedPrefHelper
+    lateinit var authPreference : Auth
     private fun handleBottomNav() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
@@ -30,7 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
             bottomNav.setupWithNavController(navController)
         }
 
-        val accessToken = sharedPrefHelper.getString(SharedPrefHelper.ACCESS_TOKEN)
+        val accessToken = authPreference.getAccessToken()
         if (accessToken.isNullOrEmpty()) {
             Timber.d("Is Null Auth Token")
         } else {

@@ -51,8 +51,8 @@ class LoginViewModel @Inject constructor(
                 loginUseCase.invoke(
                     LoginRequest(
                         fcm = "string",
-                        password = "string",
-                        phoneNumber = "string"
+                        password = password ?: "",
+                        phoneNumber = phoneNumber ?: ""
                     )
                 ).collectLatest {
                     _logInResponse.value = it

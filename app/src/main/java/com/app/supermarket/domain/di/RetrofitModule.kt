@@ -39,8 +39,8 @@ object RetrofitModule {
                 chain.request().newBuilder()
                     .addHeader("accept", "text/plain")
                     .addHeader("Content-Type",  "application/json-patch+json")
-                    .addHeader("Authorization", "")
-                    .addHeader("X-XSRF-TOKEN", userToken)
+                    .addHeader("Authorization", "Bearer $userToken")
+                    .addHeader("X-XSRF-TOKEN", "")
                     .build()
             )
         }
