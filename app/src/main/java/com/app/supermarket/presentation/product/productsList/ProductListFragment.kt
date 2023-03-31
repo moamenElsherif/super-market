@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -12,9 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
-import com.app.supermarket.base.Constants.SWIPE_REFRESH_TIME
-import com.app.supermarket.base.Constants.CATEGORY_NAME
 import com.app.supermarket.base.Constants.CATEGORY_ID
+import com.app.supermarket.base.Constants.CATEGORY_NAME
+import com.app.supermarket.base.Constants.SWIPE_REFRESH_TIME
 import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentProductListBinding
@@ -41,6 +43,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
+        initObservers()
         val extras = activity?.intent?.extras
 
         // if extras is null then return back to main activity
@@ -50,6 +53,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         categoryName = extras.getString(CATEGORY_NAME).toString()
 
         initSwipeRefreshListener(categoryId)
+        initSearchInputObserver()
 
         binding.tvTitle.text = categoryName
         getCategoryList(categoryId)
@@ -69,6 +73,12 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                     swipeRefreshLayoutProducts.isRefreshing = false
                 }, SWIPE_REFRESH_TIME)
             }
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.productsSearchResultsLiveData.observe(viewLifecycleOwner) { products ->
+            productListAdapter.submitList(products)
         }
     }
 
@@ -94,6 +104,21 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                 }
             }
         }
+    }
+
+    private fun initSearchInputObserver() {
+        binding.edtSearch.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.searchProducts(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
     }
 
     private fun checkEmptyList(size: Int?) {
