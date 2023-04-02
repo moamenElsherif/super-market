@@ -11,6 +11,7 @@ import com.app.supermarket.R
 import com.app.supermarket.base.BaseActivity
 import com.app.supermarket.databinding.ActivitySplashBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
+import com.app.supermarket.presentation.checkout.CheckoutActivity
 import com.app.supermarket.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -34,7 +35,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //        )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            openAuth()
+            val intent = Intent(this, CheckoutActivity::class.java)
+            startActivity(intent)
+            finish()
+            // openAuth()
         }, 3000)
     }
 
