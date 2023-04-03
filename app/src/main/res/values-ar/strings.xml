@@ -48,4 +48,13 @@
     <string name="checkout">Checkout</string>
     <string name="icon_back">Icon Back</string>
     <string name="add_to_cart">أضف الي السله</string>
+    <string name="building_number">رقم المبني</string>
+    <string name="delivering_address">عنوان التوصيل</string>
+    <string name="flat_number">رقم الشقه</string>
+    <string name="the_street">الشارع</string>
+    <string name="products">المنتجات</string>
+    <string name="confirm_order">تاكيد الطلب</string>
+    <string name="total_cost">المجموع الكلي :</string>
+    <string name="order_details">بيانات طلبك</string>
+    <string name="price_formate">%d ج.م</string>
 </resources>

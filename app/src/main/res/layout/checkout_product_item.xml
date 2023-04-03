@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="product"
+            type="com.app.supermarket.data.models.cart.Product" />
     </data>
 
 
@@ -38,7 +40,9 @@
                     android:id="@+id/iv_product_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    app:imageUrl="@{product.imageUrl}"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    android:contentDescription="@string/product_image" />
             </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
             <TextView
@@ -48,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Product Name"
+                android:text="@{product.productName}"
+                tools:text="Product Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/circularRevealCardView"
                 app:layout_constraintTop_toTopOf="@+id/circularRevealCardView" />
@@ -57,7 +62,8 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0 ج.م"
+                app:setProductPrice="@{product.price}"
+                tools:text="0.0 ج.م"
                 app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 

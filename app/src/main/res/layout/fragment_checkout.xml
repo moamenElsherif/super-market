@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/dlivering_location" />
+                    android:text="@string/delivering_address" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_deliver_location_info"

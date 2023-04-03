@@ -1,11 +1,9 @@
 package com.app.supermarket.base
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.app.supermarket.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -23,4 +21,9 @@ fun setImageUrl(image: ImageView, completeUrl: String?) {
 @BindingAdapter(value = ["app:getStringFromFloat"])
 fun getStringFromFloat(textView: TextView , float: Float?): String{
     return float.toString()
+}
+
+@BindingAdapter(value = ["app:setProductPrice"])
+fun setProductPrice(textView: TextView, price: Float) {
+    textView.text = textView.context.getString(R.string.price_formate, price)
 }

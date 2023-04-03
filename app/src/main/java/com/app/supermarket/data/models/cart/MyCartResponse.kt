@@ -1,12 +1,12 @@
 package com.app.supermarket.data.models.cart
 
 data class MyCartResponse(
-    val chargeAmount: Int,
-    val discountAmount: Int,
+    val chargeAmount: Float,
+    val discountAmount: Float,
     val id: Int,
     val products: List<Product>,
-    val totalPrice: Int,
-    val totalPriceAfterDiscount: Int
+    val totalPrice: Float,
+    val totalPriceAfterDiscount: Float
 )
 
 data class Product(
@@ -18,8 +18,8 @@ data class Product(
     val localizedName: String,
     val maxCounter: Int,
     val minCounter: Int,
-    val price: Int,
-    val priceAfterDiscount: Int,
+    val price: Float,
+    val priceAfterDiscount: Float,
     val productId: Int,
     val productName: String,
     val quantity: Int,
