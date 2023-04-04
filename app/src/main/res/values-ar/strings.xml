@@ -48,4 +48,5 @@
     <string name="checkout">Checkout</string>
     <string name="icon_back">Icon Back</string>
     <string name="add_to_cart">أضف الي السله</string>
+    <string name="successfully_added_to_cart">تمت الاضافه الي العربه بنجاح</string>
 </resources>

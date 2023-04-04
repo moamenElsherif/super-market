@@ -1,11 +1,15 @@
 package com.app.supermarket.base
 
 import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
 import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.base.pref.AppPref
 import dagger.hilt.android.HiltAndroidApp
+import org.intellij.lang.annotations.Language
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
+import java.util.*
 import javax.inject.Inject
 
 
