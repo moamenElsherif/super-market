@@ -21,6 +21,7 @@ import com.app.supermarket.base.Resource
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.databinding.FragmentProductListBinding
 import com.app.supermarket.presentation.main.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,6 +59,19 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         binding.tvTitle.text = categoryName
         getCategoryList(categoryId)
 
+        binding.apply {
+            tvTitle.setOnClickListener {
+                val dialog = BottomSheetDialog(requireContext())
+
+                val view = layoutInflater.inflate(R.layout.fragment_product_list, null)
+
+                dialog.setCancelable(true)
+
+                dialog.setContentView(view)
+
+                dialog.show()
+            }
+        }
     }
 
     private fun getCategoryList(categoryId: Int) {
