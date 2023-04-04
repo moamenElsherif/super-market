@@ -1,5 +1,6 @@
 package com.app.supermarket.presentation.main.cart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.supermarket.R
@@ -7,6 +8,7 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.data.models.response.CartItemResponse
 import com.app.supermarket.data.models.response.ProductResponse
 import com.app.supermarket.databinding.FragmentCartBinding
+import com.app.supermarket.presentation.checkout.CheckoutActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +33,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
 
         binding.apply {
+            cartFragment = this@CartFragment
+
             rcvCartProducts.apply {
                 layoutManager = LinearLayoutManager(requireContext()).apply {
                     this.isSmoothScrolling
@@ -40,5 +44,11 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 adapter = cartItemAdapter
             }
         }
+    }
+
+    fun navigateToCheckout() {
+        val intent = Intent(requireContext(), CheckoutActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

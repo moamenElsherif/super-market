@@ -35,9 +35,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //        )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, CheckoutActivity::class.java)
-            startActivity(intent)
-            finish()
+            openAuth()
             // openAuth()
         }, 3000)
     }
