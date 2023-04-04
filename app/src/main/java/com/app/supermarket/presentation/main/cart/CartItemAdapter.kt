@@ -2,16 +2,14 @@ package com.app.supermarket.presentation.main.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.base.callback.DiffCallback
-import com.app.supermarket.data.models.cart.Product
+import com.app.supermarket.data.models.cart.ProductResponse
 import com.app.supermarket.databinding.CartProductItemBinding
 
 class CartItemAdapter(private val cartListener: CartItemListener) :
-    ListAdapter<Product, CartItemAdapter.CartItemViewHolder>(DiffCallback<Product>()) {
+    ListAdapter<ProductResponse, CartItemAdapter.CartItemViewHolder>(DiffCallback<ProductResponse>()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
@@ -27,7 +25,7 @@ class CartItemAdapter(private val cartListener: CartItemListener) :
         RecyclerView.ViewHolder(binding.root) {
         private var quantity: Int = 1
 
-        fun bind(cartItem: Product , cartListener: CartItemListener) {
+        fun bind(cartItem: ProductResponse, cartListener: CartItemListener) {
             binding.apply {
                 item = cartItem
                 listener = cartListener

@@ -6,21 +6,18 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
-import com.app.supermarket.base.auth.Auth
-import com.app.supermarket.base.auth.SuperMarketAuth
 import com.app.supermarket.data.models.cart.MyCartResponse
 import com.app.supermarket.databinding.FragmentCartBinding
+import com.app.supermarket.domain.models.Checkout
 import com.app.supermarket.presentation.checkout.CheckoutActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CartFragment : BaseFragment<FragmentCartBinding>(),CartItemListener {
@@ -33,7 +30,17 @@ class CartFragment : BaseFragment<FragmentCartBinding>(),CartItemListener {
     override fun initUI(savedInstanceState: Bundle?) {
         observeResponse()
         handleRefresh()
+        clickListeners()
     }
+
+    private fun clickListeners() {
+        binding.apply {
+            btnCheckout.setOnClickListener {
+                clickCheckOut()
+            }
+        }
+    }
+
     private fun handleRefresh() {
         binding.apply {
             swipeRefreshLayoutCategories.setColorSchemeColors(
@@ -78,7 +85,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(),CartItemListener {
 
     private fun initAdapter(result: MyCartResponse) {
         binding.apply {
-            cartFragment = this@CartFragment
 
             rcvCartProducts.apply {
                 layoutManager = LinearLayoutManager(requireContext()).apply {
@@ -91,11 +97,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(),CartItemListener {
         }
     }
 
-    fun navigateToCheckout() {
-        val intent = Intent(requireContext(), CheckoutActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
 
     override fun clickDelete(productId: Int) {
         viewModel.deleteFromCart(productId = productId)
@@ -103,6 +104,13 @@ class CartFragment : BaseFragment<FragmentCartBinding>(),CartItemListener {
 
     override fun clickCheckOut() {
         val intent = Intent(requireContext(), CheckoutActivity::class.java)
+
+        viewModel.cartResponseData.value?.let { cartResponse ->
+            val checkoutData = Checkout(0, cartResponse.toCartData())
+            intent.putExtra(Constants.CHECKOUT_DATA_MODEL_KEY, checkoutData)
+        }
+
         startActivity(intent)
-        requireActivity().finish()    }
+        requireActivity().finish()
+    }
 }

@@ -56,6 +56,6 @@
     <string name="confirm_order">تاكيد الطلب</string>
     <string name="total_cost">المجموع الكلي :</string>
     <string name="order_details">بيانات طلبك</string>
-    <string name="price_formate">%d ج.م</string>
+    <string name="price_formate">%f ج.م</string>
     <string name="successfully_added_to_cart">تمت الاضافه الي العربه بنجاح</string>
 </resources>

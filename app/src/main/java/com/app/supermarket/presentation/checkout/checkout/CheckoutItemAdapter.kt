@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.base.callback.AdapterClickListener
 import com.app.supermarket.base.callback.DiffCallback
-import com.app.supermarket.data.models.cart.Product
 import com.app.supermarket.databinding.CheckoutProductItemBinding
+import com.app.supermarket.domain.models.Product
 
 
 class CheckoutItemAdapter(
@@ -20,8 +20,8 @@ class CheckoutItemAdapter(
     }
 
     override fun onBindViewHolder(holder: CheckoutItemViewHolder, position: Int) {
-        val category = getItem(position)
-        holder.bind(productClickListener, category)
+        val product = getItem(position)
+        holder.bind(productClickListener, product)
     }
 
     class CheckoutItemViewHolder(private val binding: CheckoutProductItemBinding) : RecyclerView.ViewHolder(binding.root) {

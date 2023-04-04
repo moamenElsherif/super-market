@@ -6,7 +6,7 @@
     <data>
         <variable
             name="product"
-            type="com.app.supermarket.data.models.cart.Product" />
+            type="com.app.supermarket.domain.models.Product" />
     </data>
 
 
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
+        style="@style/ProductCard"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{product.productName}"
+                app:setProductName="@{product}"
                 tools:text="Product Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/circularRevealCardView"
@@ -62,8 +63,20 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/circularRevealCardView"
+                app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                 app:setProductPrice="@{product.price}"
-                tools:text="0.0 ج.م"
+                tools:text="0.00 EGP" />
+
+            <TextView
+                android:id="@+id/tvProductDescription"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:maxLines="2"
+                android:text="@{product.description}"
+                tools:text="description"
+                app:layout_constraintBottom_toTopOf="@+id/tv_price"
+                app:layout_constraintEnd_toEndOf="@+id/tv_product_name"
                 app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 

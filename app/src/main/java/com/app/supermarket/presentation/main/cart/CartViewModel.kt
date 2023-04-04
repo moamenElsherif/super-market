@@ -1,11 +1,11 @@
 package com.app.supermarket.presentation.main.cart
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.supermarket.base.BaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.cart.MyCartResponse
-import com.app.supermarket.domain.usecase.ListAllUserCartItemsUseCase
 import com.app.supermarket.domain.usecase.cart.DeleteItemFromCartUseCase
 import com.app.supermarket.domain.usecase.cart.GetMyCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,14 +24,21 @@ class CartViewModel @Inject constructor(
     private var _cartResponse = MutableStateFlow<Resource<BaseResponse<MyCartResponse>>>(Resource.Loading)
     val cartResponse: StateFlow<Resource<BaseResponse<MyCartResponse>>> = _cartResponse
 
+    val cartResponseData : MutableLiveData<MyCartResponse> = MutableLiveData()
+
     init {
         getMyCart()
     }
 
     fun getMyCart(){
         viewModelScope.launch {
-            getMyCartUseCase.invoke().collectLatest {
-                _cartResponse.value = it
+            getMyCartUseCase.invoke().collectLatest { resource ->
+                _cartResponse.value = resource
+
+                if (resource is Resource.Success) {
+                    val data : MyCartResponse = resource.value.result
+                    cartResponseData.value = data
+                }
             }
         }
     }

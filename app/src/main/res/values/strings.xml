@@ -57,7 +57,7 @@
     <string name="total_cost">Total Cost :</string>
     <string name="order_details">Order Info</string>
     <string name="delivering_address">Delivering Address</string>
-    <string name="price_formate">%d EGP</string>
+    <string name="price_formate">%f EGP</string>
     <string name="successfully_added_to_cart">Added To Cart Successfully</string>
 
 </resources>
