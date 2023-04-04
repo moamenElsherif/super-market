@@ -1,5 +1,6 @@
 package com.app.supermarket.presentation.product.productdetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -11,11 +12,15 @@ import androidx.navigation.fragment.navArgs
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Resource
+import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.data.models.response.ProductResponse
 import com.app.supermarket.databinding.FragmentProductDetailsBinding
+import com.app.supermarket.presentation.authentication.AuthenticationActivity
+import com.app.supermarket.presentation.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
@@ -26,8 +31,12 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     private val args: ProductDetailsFragmentArgs by navArgs()
     private val viewModel: ProductDetailsViewModel by viewModels()
     private var productDetailsUiState: ProductDetailsUiState? = null
+    var productId: Int? = null
 
-    private val productCount = MutableLiveData<Int>(1)
+    private val productCount = MutableLiveData(1)
+
+    @Inject
+    lateinit var auth: Auth
 
 
     override fun initUI(savedInstanceState: Bundle?) {
@@ -39,7 +48,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     }
 
     private fun observeItemCount() {
-        productCount?.observe(this) {
+        productCount.observe(this) {
             binding.productCount.text = it.toString()
         }
     }
@@ -64,11 +73,42 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                         productDetailsUiState = getUiState(resource.value.result)
                         binding.productItem = productDetailsUiState
                         productCount.value = productDetailsUiState?.minCounter!!
+                        productId = productDetailsUiState?.id
                     }
                     is Resource.Failure -> {
-
+                        hideLoading()
+                        Toast.makeText(
+                            this@ProductDetailsFragment.requireContext(),
+                            resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    else -> {}
+                    else -> {
+                        hideLoading()
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.cartResponse.collectLatest { resource ->
+                when (resource) {
+                    is Resource.Loading -> showLoading()
+                    is Resource.Success -> {
+                        createToast(R.string.successfully_added_to_cart)
+                        hideLoading()
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        Toast.makeText(
+                            this@ProductDetailsFragment.requireContext(),
+                            resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    else -> {
+                        hideLoading()
+                    }
                 }
             }
         }
@@ -112,7 +152,17 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     }
 
     override fun clickAddToCart() {
-        Toast.makeText(this.requireContext(), "add item to Cart", Toast.LENGTH_SHORT).show()
+        if (!auth.getAccessToken().isNullOrEmpty()) {
+            productId?.let { viewModel.addToCart(it, productCount.value!!) }
+        }
+        else {
+            openAuthActivity()
+        }
+    }
+
+    private fun openAuthActivity(){
+        val intent = Intent(this.requireContext(), AuthenticationActivity::class.java)
+        startActivity(intent)
     }
 
     private fun handlePlusClick() {

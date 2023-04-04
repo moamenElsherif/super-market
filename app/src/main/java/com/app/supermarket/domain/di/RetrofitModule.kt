@@ -2,6 +2,7 @@ package com.app.supermarket.domain.di
 
 import android.content.Context
 import com.app.supermarket.BuildConfig
+import com.app.supermarket.base.BaseApplication
 import com.app.supermarket.base.Constants.baseUrl
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -18,7 +19,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -28,18 +28,17 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     private const val REQUEST_TIME_OUT: Long = 60
+    private val token = BaseApplication.getAppInstance().auth.getAccessToken()
 
     @Provides
     @Singleton
     fun provideHeadersInterceptor() = run {
-        val userToken = ""
-
         Interceptor { chain ->
             chain.proceed(
                 chain.request().newBuilder()
                     .addHeader("accept", "text/plain")
                     .addHeader("Content-Type",  "application/json-patch+json")
-                    .addHeader("Authorization", "Bearer $userToken")
+                    .addHeader("Authorization", "Bearer $token")
                     .addHeader("X-XSRF-TOKEN", "")
                     .build()
             )

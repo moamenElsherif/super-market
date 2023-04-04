@@ -14,9 +14,11 @@ class AddToCartUseCase @Inject constructor(
     private val cartRepo: CartRepo
 ) {
 
-    operator fun invoke(addToCartRequest: AddToCartRequest): Flow<Resource<BaseResponse<*>>> =
+    operator fun invoke(productId: Int, quantity: Int): Flow<Resource<BaseResponse<*>>> =
         flow {
             emit(Resource.Loading)
-            emit(cartRepo.addToCart(addToCartRequest))
+            emit(cartRepo.addToCart(AddToCartRequest(
+                productId , quantity
+            )))
         }.flowOn(Dispatchers.IO)
 }

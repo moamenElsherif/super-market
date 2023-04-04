@@ -27,17 +27,24 @@ open class BaseRemoteDataSource @Inject constructor() {
     }
 
     suspend fun <T> safeApiCall(apiCall: suspend () -> T): Resource<T> {
-        try {
+        return try {
             val apiResponse = apiCall.invoke()
             Timber.d("=> ${(apiResponse as BaseResponse<*>).success} <==")
             println(apiResponse)
-            return when (apiResponse.success) {
-                true -> Resource.Success(apiResponse)
-                else -> Resource.Failure(FailureStatus.API_FAIL)
+            if (apiResponse.unAuthorizedRequest){
+                Resource.Failure(FailureStatus.TOKEN_EXPIRED)
             }
+            else{
+                return when (apiResponse.success) {
+                    true -> Resource.Success(apiResponse)
+                    else -> Resource.Failure(FailureStatus.API_FAIL)
+                }
+            }
+
         }catch (e: Exception){
-            println(e)
+            Timber.d(e)
+            Resource.Failure(FailureStatus.API_FAIL)
         }
-        return Resource.Failure(FailureStatus.OTHER)
+
     }
 }

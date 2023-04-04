@@ -2,13 +2,17 @@ package com.app.supermarket.presentation.main.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.base.callback.DiffCallback
-import com.app.supermarket.data.models.response.CartItemResponse
+import com.app.supermarket.data.models.cart.Product
 import com.app.supermarket.databinding.CartProductItemBinding
 
-class CartItemAdapter : ListAdapter<CartItemResponse, CartItemAdapter.CartItemViewHolder>(DiffCallback<CartItemResponse>()) {
+class CartItemAdapter(private val cartListener: CartItemListener) :
+    ListAdapter<Product, CartItemAdapter.CartItemViewHolder>(DiffCallback<Product>()) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
         return CartItemViewHolder.form(parent)
@@ -16,15 +20,35 @@ class CartItemAdapter : ListAdapter<CartItemResponse, CartItemAdapter.CartItemVi
 
     override fun onBindViewHolder(holder: CartItemViewHolder, position: Int) {
         val cartItem = getItem(position)
-        holder.bind(cartItem)
+        holder.bind(cartItem , cartListener)
     }
 
-    class CartItemViewHolder(private val binding: CartProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cartItem: CartItemResponse) {
+    class CartItemViewHolder(private val binding: CartProductItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private var quantity: Int = 1
+
+        fun bind(cartItem: Product , cartListener: CartItemListener) {
             binding.apply {
                 item = cartItem
+                listener = cartListener
+                quantity = cartItem.quantity
+                setProductCount()
+                btnMinus.setOnClickListener {
+                    if (quantity == cartItem.minCounter) return@setOnClickListener
+                    quantity -= 1
+                    setProductCount()
+                }
+                btnPlus.setOnClickListener {
+                    if (quantity == cartItem.maxCounter) return@setOnClickListener
+                    quantity += 1
+                    setProductCount()
+                }
                 executePendingBindings()
             }
+        }
+
+        private fun setProductCount() {
+            binding.productCount.text = quantity.toString()
         }
 
         companion object {

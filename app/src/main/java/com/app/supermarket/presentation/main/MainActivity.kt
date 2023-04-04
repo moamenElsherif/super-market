@@ -20,22 +20,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
     override fun initUI(savedInstanceState: Bundle?) {
         handleBottomNav()
     }
-
-    @Inject
-    lateinit var authPreference : Auth
     private fun handleBottomNav() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
 
         binding.apply {
             bottomNav.setupWithNavController(navController)
-        }
-
-        val accessToken = authPreference.getAccessToken()
-        if (accessToken.isNullOrEmpty()) {
-            Timber.d("Is Null Auth Token")
-        } else {
-            Timber.d("Not null => $accessToken")
         }
     }
 }

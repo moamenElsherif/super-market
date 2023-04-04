@@ -68,7 +68,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
                     is Resource.Success -> {
                         hideLoading()
                         createToast(R.string.login)
-                        openMain()
+                        this@LoginFragment.requireActivity().finish()
                     }
                     is Resource.Failure -> {
                         hideLoading()

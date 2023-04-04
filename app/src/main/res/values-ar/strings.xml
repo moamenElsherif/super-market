@@ -57,4 +57,5 @@
     <string name="total_cost">المجموع الكلي :</string>
     <string name="order_details">بيانات طلبك</string>
     <string name="price_formate">%d ج.م</string>
+    <string name="successfully_added_to_cart">تمت الاضافه الي العربه بنجاح</string>
 </resources>
