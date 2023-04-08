@@ -1,15 +1,9 @@
 package com.app.supermarket.base
 
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
-import retrofit2.HttpException
 import timber.log.Timber
-import java.net.ConnectException
-import java.net.UnknownHostException
-import java.util.HashMap
 import javax.inject.Inject
-import kotlin.Exception
 
 open class BaseRemoteDataSource @Inject constructor() {
     var gson: Gson = Gson()
@@ -31,15 +25,13 @@ open class BaseRemoteDataSource @Inject constructor() {
             val apiResponse = apiCall.invoke()
             Timber.d("=> ${(apiResponse as BaseResponse<*>).success} <==")
             println(apiResponse)
-            if (apiResponse.unAuthorizedRequest){
-                Resource.Failure(FailureStatus.TOKEN_EXPIRED)
-            }
-            else{
                 return when (apiResponse.success) {
                     true -> Resource.Success(apiResponse)
-                    else -> Resource.Failure(FailureStatus.API_FAIL)
+                    else -> {
+                        if (apiResponse.unAuthorizedRequest) Resource.Failure(FailureStatus.TOKEN_EXPIRED)
+                        else Resource.Failure(FailureStatus.API_FAIL)
+                    }
                 }
-            }
 
         }catch (e: Exception){
             Timber.d(e)
