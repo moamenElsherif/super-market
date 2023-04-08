@@ -29,6 +29,10 @@ class DataSource @Inject constructor(
         apiService.getProduct(categoryId)
     }
 
+    suspend fun getUserData(userId: Int) = safeApiCall {
+        apiService.getUserData(userId)
+    }
+
     suspend fun listAllUserCartProducts() = safeApiCall {
         apiService.listAllUserCartProducts()
     }

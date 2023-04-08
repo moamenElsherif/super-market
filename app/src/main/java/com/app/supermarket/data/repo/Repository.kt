@@ -12,5 +12,6 @@ interface Repository {
     suspend fun categoriesFlow(): Resource<BaseResponse<CategoryHomeResponse>>
     suspend fun listAllProductsByCategory(categoryId: Int): Resource<BaseResponse<GetAllProductResponse>>
     suspend fun getProduct(categoryId: Int): Resource<BaseResponse<ProductResponse>>
+    suspend fun getUserData(userId: Int): Resource<BaseResponse<UserDataResponse>>
     suspend fun listAllUserCartProducts(): Resource<BaseResponse<AllCartItemsResponse>>
 }

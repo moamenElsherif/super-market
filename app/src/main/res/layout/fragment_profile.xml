@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fragmentListener"
+            type="com.app.supermarket.presentation.main.settings.ProfileClickListener" />
 
+        <variable
+            name="uiState"
+            type="com.app.supermarket.presentation.main.settings.UserDataUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,6 +50,7 @@
             android:layout_marginTop="8dp"
             android:padding="5dp"
             tools:text="Moamen elsherif"
+            android:text="@{uiState.name}"
             android:textAlignment="center"
             android:textColor="@color/orange"
             android:textSize="20sp"
@@ -60,6 +67,7 @@
             android:textAlignment="center"
             android:textColor="@color/taupe"
             android:textSize="14sp"
+            android:text="@{uiState.emailAddress}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +82,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/logout"
             android:textAllCaps="false"
+            android:onClick="@{() -> fragmentListener.onLogoutClickListener()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -83,6 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
+            android:visibility="gone"
+            android:onClick="@{() -> fragmentListener.onLoginClickListener()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,10 +104,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             android:text="يرجي تسجيل الدخول لعرض ملفك التعريفي"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnEditAddress"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/arrow_orange"
+            android:text="@string/edit_address"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserEmail"
+            app:layout_constraintVertical_bias="0.163" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

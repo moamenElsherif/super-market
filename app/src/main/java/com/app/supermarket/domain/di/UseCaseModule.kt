@@ -3,10 +3,7 @@ package com.app.supermarket.domain.di
 import com.app.supermarket.base.AuthPreference
 import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.data.repo.Repository
-import com.app.supermarket.domain.usecase.GetAllCategoryProductsUseCase
-import com.app.supermarket.domain.usecase.ListAllUserCartItemsUseCase
-import com.app.supermarket.domain.usecase.LoginUseCase
-import com.app.supermarket.domain.usecase.SaveAuthTokenUseCase
+import com.app.supermarket.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,4 +38,10 @@ class UseCaseModule {
     fun provideSaveAuthTokenUseCase(
         authPreference: Auth
     ): SaveAuthTokenUseCase = SaveAuthTokenUseCase(authPreference)
+
+    @Provides
+    @Singleton
+    fun provideGetUserDataUseCase(
+        repository: Repository
+    ): GetUserDataUseCase = GetUserDataUseCase(repository)
 }

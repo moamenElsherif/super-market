@@ -29,6 +29,9 @@ interface ApiService {
     @GET(GET_PRODUCT)
     suspend fun getProduct(@Query(value = "id") categoryId: Int) : BaseResponse<ProductResponse>
 
+    @GET(GET_USER_DATA)
+    suspend fun getUserData(@Query(value = "Id") userId: Int) : BaseResponse<UserDataResponse>
+
 
     companion object {
 
@@ -44,6 +47,8 @@ interface ApiService {
         const val LOGIN = "api/TokenAuth/AuthenticateCustomer"
 
         const val GET_PRODUCT = "api/services/app/Product/Get"
+
+        const val GET_USER_DATA = "api/services/app/User/Get"
     }
 
 }
