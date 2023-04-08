@@ -5,6 +5,7 @@ import android.view.View
 import com.app.supermarket.R
 import com.app.supermarket.base.AuthPreference
 import com.app.supermarket.base.BaseFragment
+import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -13,7 +14,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
 
-    @Inject lateinit var authPreference: AuthPreference
+    @Inject lateinit var authPreference: Auth
 
     override val layoutRes: Int
         get() = R.layout.fragment_profile
@@ -32,7 +33,6 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
                 ivUserImage.visibility = View.VISIBLE
                 tvUserName.visibility = View.VISIBLE
                 tvUserEmail.visibility = View.VISIBLE
-                tvUserAddress.visibility = View.VISIBLE
                 btnLogout.visibility = View.VISIBLE
             } else {
                 btnLogin.visibility = View.VISIBLE
@@ -42,7 +42,6 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>() {
                 ivUserImage.visibility = View.GONE
                 tvUserName.visibility = View.GONE
                 tvUserEmail.visibility = View.GONE
-                tvUserAddress.visibility = View.GONE
                 btnLogout.visibility = View.GONE
             }
         }
