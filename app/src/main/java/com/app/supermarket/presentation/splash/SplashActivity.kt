@@ -27,14 +27,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun initSplashScreen() {
-//        window.setFlags(
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN
-//        )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            openAuth()
-            // openAuth()
+            openMain()
         }, 3000)
     }
 

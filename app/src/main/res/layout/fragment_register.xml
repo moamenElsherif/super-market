@@ -10,27 +10,47 @@
             type="com.app.supermarket.presentation.authentication.register.RegisterListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/backgroundColor"
-        tools:context=".presentation.authentication.register.RegisterFragment">
+        android:scrollbars="none"
+        android:background="?attr/backgroundColor">
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
+            android:layout_height="wrap_content">
 
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayoutRegister"
+                style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/gray"
+                android:clipToPadding="true"
+                app:elevation="0dp">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolBarOrdersItems"
+                    style="@style/Widget.MaterialComponents.Toolbar.Surface"
+                    android:layout_width="match_parent"
+                    app:navigationIcon="@drawable/arrow_back"
+                    android:layout_height="match_parent"
+                    android:background="?attr/background" />
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:background="?attr/backgroundColor"
+                android:paddingHorizontal="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/appBarLayoutRegister"
+                tools:context=".presentation.authentication.register.RegisterFragment">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/appCompatImageView"
@@ -46,10 +66,11 @@
                     android:id="@+id/appCompatTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/app_name"
                     android:textAlignment="center"
-                    android:textSize="16sp"
                     android:textColor="@color/orange"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +81,7 @@
                     android:id="@+id/appCompatTextView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="32dp"
                     android:text="@string/register"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -70,105 +91,84 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/ed_name"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_phone_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="@null"
                     android:hint="@string/name"
-                    android:textAlignment="viewStart"
-                    android:inputType="textPersonName"
-                    android:padding="15dp"
-                    android:textColorHint="@color/taupe"
+                    android:layout_marginTop="16dp"
+                    app:startIconDrawable="@drawable/user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
+                    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/user"
-                    app:layout_constraintBottom_toBottomOf="@+id/ed_name"
-                    app:layout_constraintEnd_toStartOf="@+id/ed_name"
-                    app:layout_constraintTop_toTopOf="@+id/ed_name" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/ed_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="@null"
-                    android:hint="@string/email"
-                    android:textAlignment="viewStart"
-                    android:inputType="textEmailAddress"
-                    android:padding="15dp"
-                    android:textColorHint="@color/taupe"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_name" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/mail"
-                    app:layout_constraintBottom_toBottomOf="@+id/ed_email"
-                    app:layout_constraintEnd_toStartOf="@+id/ed_email"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_name" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/ed_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="@null"
-                    android:hint="@string/password"
-                    android:textAlignment="viewStart"
-                    android:inputType="textPassword"
-                    android:padding="15dp"
-                    android:textColorHint="@color/taupe"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_email" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/key"
-                    app:layout_constraintBottom_toBottomOf="@+id/ed_password"
-                    app:layout_constraintEnd_toStartOf="@+id/ed_password"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_email" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    app:cardBackgroundColor="@color/orange"
-                    android:onClick="@{()-> listener.clickContinue()}"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_password">
-
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingVertical="12dp"
-                        android:text="@string/confirm"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
-                </androidx.cardview.widget.CardView>
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edEmailLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:layout_marginTop="8dp"
+                    app:startIconDrawable="@drawable/mail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_phone_layout"
+                    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_password_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/password"
+                    app:startIconDrawable="@drawable/lock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edEmailLayout"
+                    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="@{()-> listener.clickContinue()}"
+                    android:text="@string/register"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_password_layout" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </ScrollView>
+
 </layout>

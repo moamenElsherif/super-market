@@ -4,7 +4,7 @@
     <string name="mobile_no">رقم الهاتف</string>
     <string name="password">الرقم السري</string>
     <string name="forget_password">نسيت الرقم السري ؟</string>
-    <string name="not_registered_yet_click_here_to">لم تسجل الدخول بعد؟ اضغط هنا</string>
+    <string name="not_registered_yet_click_here_to">ليس لديك حساب؟ اضغط هنا</string>
     <string name="signup">تسجيل الدخول</string>
     <string name="verify_your_number">تأكيد رقم الهاتف</string>
     <string name="_20">+20</string>
@@ -58,4 +58,8 @@
     <string name="order_details">بيانات طلبك</string>
     <string name="price_formate">%f ج.م</string>
     <string name="successfully_added_to_cart">تمت الاضافه الي العربه بنجاح</string>
+    <string name="create_account">سجل حساب</string>
+    <string name="future_shopping">تسوق المستقبل</string>
+    <string name="user_image">صوره المستخدم</string>
+    <string name="logout">تسجيل الخروج</string>
 </resources>
