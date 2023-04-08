@@ -62,5 +62,5 @@
     <string name="future_shopping">تسوق المستقبل</string>
     <string name="user_image">صوره المستخدم</string>
     <string name="logout">تسجيل الخروج</string>
-    <string name="edit_address">تعديل العنوان</string>
+    <string name="address">العنوان</string>
 </resources>

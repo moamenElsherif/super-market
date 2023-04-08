@@ -64,6 +64,6 @@
     <string name="user_image">User Image</string>
     <string name="logout">Logout</string>
     <string name="dummy_address" translatable="false">6, Gamal Abdelkader Street, Cairo</string>
-    <string name="edit_address">Edit Address</string>
+    <string name="address">Address</string>
 
 </resources>
