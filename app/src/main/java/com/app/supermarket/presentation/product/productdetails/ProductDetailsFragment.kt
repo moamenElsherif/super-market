@@ -16,7 +16,6 @@ import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.data.models.response.ProductResponse
 import com.app.supermarket.databinding.FragmentProductDetailsBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
-import com.app.supermarket.presentation.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -100,11 +99,6 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                     }
                     is Resource.Failure -> {
                         hideLoading()
-                        Toast.makeText(
-                            this@ProductDetailsFragment.requireContext(),
-                            resource.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                     else -> {
                         hideLoading()

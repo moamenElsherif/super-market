@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.presentation.hideLoadingDialog
+import com.app.supermarket.presentation.main.MainActivity
+import com.app.supermarket.presentation.openActivityAndClearStack
 import com.app.supermarket.presentation.showLoadingDialog
 import java.lang.Exception
 import java.util.*
@@ -74,6 +76,10 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
 
     fun hideLoading() = hideLoadingDialog(progressDialog, requireActivity())
 
+    fun restartApp(){
+        this.requireActivity().openActivityAndClearStack(MainActivity::class.java)
+        activity?.finish()
+    }
 
     protected abstract fun initUI(savedInstanceState: Bundle?)
 
