@@ -1,7 +1,7 @@
 package com.app.supermarket.base
 
 object Constants {
-    const val baseUrl = "http://emawadsw-001-site3.atempurl.com/"
+    const val baseUrl = "http://mshopping614-001-site1.htempurl.com/"
     const val arabic = "ar"
     const val english ="en"
 
