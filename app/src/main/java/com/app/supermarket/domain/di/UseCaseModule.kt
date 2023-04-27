@@ -1,6 +1,5 @@
 package com.app.supermarket.domain.di
 
-import com.app.supermarket.base.AuthPreference
 import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.data.repo.Repository
 import com.app.supermarket.domain.usecase.*
@@ -44,4 +43,16 @@ class UseCaseModule {
     fun provideGetUserDataUseCase(
         repository: Repository
     ): GetUserDataUseCase = GetUserDataUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetUserAddressUseCase(
+        repository: Repository
+    ): GetUserAddressUseCase = GetUserAddressUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideCreateUpdateUserAddressUseCase(
+        repository: Repository
+    ): CreateUpdateUserAddressUseCase = CreateUpdateUserAddressUseCase(repository)
 }

@@ -3,6 +3,7 @@ package com.app.supermarket.data.repo
 import com.app.supermarket.base.BaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.datasource.DataSource
+import com.app.supermarket.data.models.request.AddressRequest
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
 import com.app.supermarket.data.models.response.*
@@ -31,5 +32,13 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun listAllUserCartProducts(): Resource<BaseResponse<AllCartItemsResponse>> {
         return dataSource.listAllUserCartProducts()
+    }
+
+    override suspend fun getUserAddress(userId: Int): Resource<BaseResponse<AddressResponse>> {
+        return dataSource.getUserAddress(userId)
+    }
+
+    override suspend fun addUserAddress(addressRequest: AddressRequest): Resource<BaseResponse<AddressResponse>> {
+        return dataSource.adUserAddress(addressRequest)
     }
 }

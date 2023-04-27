@@ -2,6 +2,7 @@ package com.app.supermarket.data.datasource
 
 import com.app.supermarket.base.BaseRemoteDataSource
 import com.app.supermarket.data.api.ApiService
+import com.app.supermarket.data.models.request.AddressRequest
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
 import javax.inject.Inject
@@ -35,5 +36,13 @@ class DataSource @Inject constructor(
 
     suspend fun listAllUserCartProducts() = safeApiCall {
         apiService.listAllUserCartProducts()
+    }
+
+    suspend fun getUserAddress(userId: Int) = safeApiCall {
+        apiService.getUserAddress(userId)
+    }
+
+    suspend fun adUserAddress(addressRequest: AddressRequest) = safeApiCall {
+        apiService.addUserAddress(addressRequest)
     }
 }

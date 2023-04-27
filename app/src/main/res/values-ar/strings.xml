@@ -63,4 +63,10 @@
     <string name="user_image">صوره المستخدم</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="address">العنوان</string>
+    <string name="previous">السابق</string>
+    <string name="apartment_num">رقم الشقه</string>
+    <string name="building_num">رقم المبني</string>
+    <string name="street">الشارع</string>
+    <string name="address_note">ملحوظه العنوان</string>
+    <string name="save">حفظ</string>
 </resources>

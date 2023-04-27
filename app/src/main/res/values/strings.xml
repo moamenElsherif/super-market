@@ -66,4 +66,13 @@
     <string name="dummy_address" translatable="false">6, Gamal Abdelkader Street, Cairo</string>
     <string name="address">Address</string>
 
+    <string name="previous">Previous</string>
+
+
+    <string name="apartment_num">Apartment Num</string>
+    <string name="building_num">Building Num</string>
+    <string name="street">Street</string>
+    <string name="address_note">Address Note</string>
+    <string name="save">Save</string>
+
 </resources>

@@ -1,7 +1,6 @@
 package com.app.supermarket.base
 
 import androidx.annotation.Keep
-import com.google.gson.annotations.SerializedName
 
 @Keep
 data class BaseResponse<T>(
