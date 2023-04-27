@@ -6,6 +6,7 @@ import com.app.supermarket.base.BaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.cart.MyCartResponse
 import com.app.supermarket.domain.usecase.ListAllUserCartItemsUseCase
+import com.app.supermarket.domain.usecase.cart.AddToCartUseCase
 import com.app.supermarket.domain.usecase.cart.DeleteItemFromCartUseCase
 import com.app.supermarket.domain.usecase.cart.GetMyCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,11 +19,17 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val getMyCartUseCase: GetMyCartUseCase,
-    private val deleteItemFromCartUseCase: DeleteItemFromCartUseCase
+    private val deleteItemFromCartUseCase: DeleteItemFromCartUseCase,
+    private val addToCartUseCase: AddToCartUseCase
 ) : ViewModel() {
 
     private var _cartResponse = MutableStateFlow<Resource<BaseResponse<MyCartResponse>>>(Resource.Loading)
     val cartResponse: StateFlow<Resource<BaseResponse<MyCartResponse>>> = _cartResponse
+
+    private val _updateCartResponse =
+        MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
+    val updateCartResponse: StateFlow<Resource<BaseResponse<*>>> = _updateCartResponse
+
 
     init {
         getMyCart()
@@ -36,12 +43,24 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    fun updateCart(productId: Int, quantity: Int) {
+        viewModelScope.launch {
+            _cartResponse.value = Resource.Loading
+            addToCartUseCase.invoke(
+                productId,
+                quantity
+            ).collect {
+                _updateCartResponse.value = it
+            }
+        }
+    }
+
     fun deleteFromCart(productId: Int) {
         viewModelScope.launch {
             deleteItemFromCartUseCase.invoke(
                 productId,
             ).collectLatest {
-
+                _updateCartResponse.value = it
             }
         }
     }

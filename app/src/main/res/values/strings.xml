@@ -58,4 +58,6 @@
     <string name="total_cost">المجموع الكلي :</string>
     <string name="order_details">بيانات طلبك</string>
     <string name="successfully_added_to_cart">Added To Cart Successfully</string>
+    <string name="update_successfully">updated</string>
+    <string name="update_failed">update failed</string>
 </resources>

@@ -2,8 +2,6 @@ package com.app.supermarket.presentation.main.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.supermarket.base.callback.DiffCallback
@@ -20,35 +18,50 @@ class CartItemAdapter(private val cartListener: CartItemListener) :
 
     override fun onBindViewHolder(holder: CartItemViewHolder, position: Int) {
         val cartItem = getItem(position)
-        holder.bind(cartItem , cartListener)
+        holder.bind(cartItem, cartListener)
     }
 
     class CartItemViewHolder(private val binding: CartProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var quantity: Int = 1
+        private var initQuantity: Int = 1
+        private var newQuantity: Int = 1
 
-        fun bind(cartItem: Product , cartListener: CartItemListener) {
+        fun bind(cartItem: Product, cartListener: CartItemListener) {
             binding.apply {
                 item = cartItem
                 listener = cartListener
                 quantity = cartItem.quantity
+                initQuantity = cartItem.quantity
+                newQuantity = cartItem.quantity
+                editVisibility = false
                 setProductCount()
                 btnMinus.setOnClickListener {
-                    if (quantity == cartItem.minCounter) return@setOnClickListener
-                    quantity -= 1
+                    if (newQuantity == cartItem.minCounter) return@setOnClickListener
+                    newQuantity -= 1
+                    checkQuantityChange()
                     setProductCount()
                 }
                 btnPlus.setOnClickListener {
-                    if (quantity == cartItem.maxCounter) return@setOnClickListener
-                    quantity += 1
+                    if (newQuantity == cartItem.maxCounter) return@setOnClickListener
+                    newQuantity += 1
+                    checkQuantityChange()
+                    setProductCount()
+                }
+                cancelCheck.setOnClickListener {
+                    newQuantity = initQuantity
+                    checkQuantityChange()
                     setProductCount()
                 }
                 executePendingBindings()
             }
         }
 
+        private fun checkQuantityChange() {
+            binding.editVisibility = initQuantity != newQuantity
+        }
+
         private fun setProductCount() {
-            binding.productCount.text = quantity.toString()
+            binding.quantity = newQuantity
         }
 
         companion object {

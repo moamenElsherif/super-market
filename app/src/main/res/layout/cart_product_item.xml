@@ -11,6 +11,16 @@
         <variable
             name="listener"
             type="com.app.supermarket.presentation.main.cart.CartItemListener" />
+
+        <variable
+            name="editVisibility"
+            type="Boolean" />
+
+        <variable
+            name="quantity"
+            type="Integer" />
+
+        <import type="android.view.View"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -24,6 +34,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/off_white"
             android:padding="16dp">
 
             <ImageView
@@ -37,60 +48,173 @@
                 app:imageUrl="@{item.imageUrl}"
                 android:contentDescription="TODO" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="10dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/off_white"
                 app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
                 app:layout_constraintStart_toEndOf="@+id/ivProductImage"
                 app:layout_constraintTop_toTopOf="@+id/ivProductImage">
 
-                <TextView
-                    android:id="@+id/tvProductName"
-                    style="@style/TextAppearance.Material3.TitleMedium"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:text="@{item.localizedName}"
-                    app:layout_constraintStart_toEndOf="@+id/ivProductImage"
-                    app:layout_constraintTop_toTopOf="@+id/ivProductImage"
-                    tools:text="Product Name" />
+                    android:layout_marginStart="5dp"
+                    android:background="@color/off_white"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvProductDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:maxLines="3"
-                    android:paddingVertical="5dp"
-                    android:text="@{item.localizedDescription}"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintBottom_toTopOf="@+id/tvProductPrice"
-                    app:layout_constraintEnd_toStartOf="@+id/ibRemove"
-                    app:layout_constraintStart_toStartOf="@+id/tvProductName"
-                    app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-                    tools:text="Some product item descreptio like price" />
+                    <TextView
+                        android:id="@+id/tvProductName"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/off_white"
+                        android:text="@{item.localizedName}"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintStart_toEndOf="@+id/ivProductImage"
+                        app:layout_constraintTop_toTopOf="@+id/ivProductImage"
+                        tools:text="Product Name" />
 
-                <TextView
-                    android:id="@+id/tvProductPrice"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvProductDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/off_white"
+                        android:maxLines="3"
+                        android:paddingVertical="5dp"
+                        android:text="@{item.localizedDescription}"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintBottom_toTopOf="@+id/tvProductPrice"
+                        app:layout_constraintEnd_toStartOf="@+id/ibRemove"
+                        app:layout_constraintStart_toStartOf="@+id/tvProductName"
+                        app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                        tools:text="Some product item descreptio like price" />
+
+                    <TextView
+                        android:id="@+id/tvProductPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/off_white"
+                        android:paddingVertical="3dp"
+                        android:text="@{String.valueOf(item.priceAfterDiscount)}"
+                        android:textAlignment="viewStart"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvProductDescription"
+                        tools:text="20 EGP" />
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(item.priceAfterDiscount)}"
-                    android:textStyle="bold"
-                    android:textAlignment="viewStart"
-                    android:paddingVertical="3dp"
+                    android:background="@color/off_white"
+                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tvProductDescription"
-                    tools:text="20 EGP" />
-            </LinearLayout>
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/off_white"
+                        android:padding="3dp"
+                        android:src="@drawable/plus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/product_count"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/product_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/off_white"
+                        android:padding="6dp"
+                        android:text="@{quantity.toString()}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+                        tools:text="5" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_minus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/off_white"
+                        android:padding="3dp"
+                        android:src="@drawable/minus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/product_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/edit_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@color/off_white"
+                    android:padding="5dp"
+                    android:animateLayoutChanges="true"
+                    android:paddingHorizontal="5dp"
+                    android:visibility="@{editVisibility ?View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+
+                    <ImageView
+                        android:id="@+id/correct_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@color/off_white"
+                        android:src="@drawable/correct"
+                        android:onClick="@{()-> listener.clickSave(item.productId , quantity)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@drawable/correct" />
+
+                    <ImageView
+                        android:id="@+id/cancel_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@color/off_white"
+                        android:src="@drawable/x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/correct_check"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@drawable/x" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <ImageButton
                 android:id="@+id/ibRemove"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:onClick="@{()-> listener.clickDelete(item.productId)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@color/off_white"
@@ -98,54 +222,6 @@
                 app:srcCompat="@drawable/delete" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ibRemove"
-                app:layout_constraintVertical_bias="1.0">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/btn_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/plus"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/product_count"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/product_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5"
-                    tools:text="5" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/btn_minus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:src="@drawable/minus"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/product_count"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
