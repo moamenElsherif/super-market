@@ -1,5 +1,6 @@
 package com.app.supermarket.presentation.main.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,8 @@ import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.cart.MyCartResponse
 import com.app.supermarket.databinding.FragmentCartBinding
+import com.app.supermarket.domain.models.Checkout
+import com.app.supermarket.presentation.checkout.CheckoutActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +31,16 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
     override fun initUI(savedInstanceState: Bundle?) {
         observeResponse()
         handleRefresh()
+        clickListeners()
         observeCartUpdate()
+    }
+
+    private fun clickListeners() {
+        binding.apply {
+            btnCheckout.setOnClickListener {
+                clickCheckOut()
+            }
+        }
     }
 
     private fun handleRefresh() {
@@ -58,9 +70,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
                     is Resource.Failure -> {
                         setRefreshingValue(false)
                         Toast.makeText(
-                            this@CartFragment.requireContext(),
-                            response.message.toString(),
-                            Toast.LENGTH_SHORT
+                            this@CartFragment.requireContext(), response.message.toString(), Toast.LENGTH_SHORT
                         ).show()
                     }
                     else -> {
@@ -95,6 +105,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
 
     private fun initAdapter(result: MyCartResponse) {
         binding.apply {
+
             rcvCartProducts.apply {
                 layoutManager = LinearLayoutManager(requireContext()).apply {
                     this.isSmoothScrolling
@@ -106,12 +117,21 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
         }
     }
 
+
     override fun clickDelete(productId: Int) {
         viewModel.deleteFromCart(productId = productId)
     }
 
     override fun clickCheckOut() {
-        Toast.makeText(this.requireContext(), "open check out", Toast.LENGTH_SHORT).show()
+        val intent = Intent(requireContext(), CheckoutActivity::class.java)
+
+        viewModel.cartResponseData.value?.let { cartResponse ->
+            val checkoutData = Checkout(0, cartResponse.toCartData())
+            intent.putExtra(Constants.CHECKOUT_DATA_MODEL_KEY, checkoutData)
+        }
+
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun clickSave(productId: Int, itemCount: Int) {

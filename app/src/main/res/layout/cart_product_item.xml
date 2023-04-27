@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.app.supermarket.data.models.cart.Product" />
+            type="com.app.supermarket.data.models.cart.ProductResponse" />
 
         <variable
             name="listener"
@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars"
                 app:imageUrl="@{item.imageUrl}"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/product_image" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"

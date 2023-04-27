@@ -4,7 +4,7 @@
     <string name="mobile_no">Mobile No</string>
     <string name="password">Password</string>
     <string name="forget_password">Forget Password ?</string>
-    <string name="not_registered_yet_click_here_to">Not Registered yet? Click here to</string>
+    <string name="not_registered_yet_click_here_to">Don\'t have account? click here</string>
     <string name="signup">SignUp</string>
     <string name="verify_your_number">Verify Your Number</string>
     <string name="_20">+20</string>
@@ -49,15 +49,23 @@
     <string name="checkout">Checkout</string>
     <string name="icon_back">Icon Back</string>
     <string name="add_to_cart">Add To Cart</string>
-    <string name="building_number">رقم المبني</string>
-    <string name="dlivering_location">عنوان التوصيل</string>
-    <string name="flat_number">رقم الشقه</string>
-    <string name="the_street">الشارع</string>
-    <string name="products">المنتجات</string>
-    <string name="confirm_order">تاكيد الطلب</string>
-    <string name="total_cost">المجموع الكلي :</string>
-    <string name="order_details">بيانات طلبك</string>
+    <string name="confirm_order">Order Confirmation</string>
+    <string name="building_number">Building no.</string>
+    <string name="flat_number">Flat no.</string>
+    <string name="the_street">Street</string>
+    <string name="products">Products</string>
+    <string name="total_cost">Total Cost :</string>
+    <string name="order_details">Order Info</string>
+    <string name="delivering_address">Delivering Address</string>
+    <string name="price_formate">%f EGP</string>
     <string name="successfully_added_to_cart">Added To Cart Successfully</string>
+    <string name="create_account">Create Account</string>
+    <string name="future_shopping">Future Shopping</string>
+    <string name="user_image">User Image</string>
+    <string name="logout">Logout</string>
+    <string name="dummy_address" translatable="false">6, Gamal Abdelkader Street, Cairo</string>
+    <string name="address">Address</string>
+
     <string name="update_successfully">updated</string>
     <string name="update_failed">update failed</string>
 </resources>

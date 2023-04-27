@@ -27,6 +27,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun initSplashScreen() {
+
         Handler(Looper.getMainLooper()).postDelayed({
             openMain()
         }, 3000)
