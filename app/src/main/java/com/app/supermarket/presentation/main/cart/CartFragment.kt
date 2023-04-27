@@ -27,6 +27,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
 
     private val cartItemAdapter: CartItemAdapter = CartItemAdapter(this)
     private val viewModel: CartViewModel by viewModels()
+    private var cartItems: MyCartResponse? = null
 
     override fun initUI(savedInstanceState: Bundle?) {
         observeResponse()
@@ -66,11 +67,14 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
                     is Resource.Success -> {
                         setRefreshingValue(false)
                         initAdapter(response.value.result)
+                        cartItems = response.value.result
                     }
                     is Resource.Failure -> {
                         setRefreshingValue(false)
                         Toast.makeText(
-                            this@CartFragment.requireContext(), response.message.toString(), Toast.LENGTH_SHORT
+                            this@CartFragment.requireContext(),
+                            response.message.toString(),
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
                     else -> {
@@ -124,14 +128,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartItemListener {
 
     override fun clickCheckOut() {
         val intent = Intent(requireContext(), CheckoutActivity::class.java)
-
-        viewModel.cartResponseData.value?.let { cartResponse ->
-            val checkoutData = Checkout(0, cartResponse.toCartData())
-            intent.putExtra(Constants.CHECKOUT_DATA_MODEL_KEY, checkoutData)
-        }
-
+        val checkoutData = cartItems?.toCartData()?.let { Checkout(0, it) }
+        intent.putExtra(Constants.CHECKOUT_DATA_MODEL_KEY, checkoutData)
         startActivity(intent)
-        requireActivity().finish()
     }
 
     override fun clickSave(productId: Int, itemCount: Int) {
