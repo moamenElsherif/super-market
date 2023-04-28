@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="com.app.supermarket.presentation.main.cart.CartItemListener" />
+            type="com.app.supermarket.presentation.main.cart.CartListener" />
 
         <variable
             name="editVisibility"
@@ -28,6 +28,7 @@
         android:layout_height="160dp"
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
+        android:layout_marginHorizontal="10dp"
         app:cardBackgroundColor="@color/off_white"
         android:layout_marginVertical="8dp">
 
@@ -35,23 +36,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/off_white"
-            android:padding="16dp">
+            android:padding="5dp">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/ivProductImage"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
+                app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"
-                app:imageUrl="@{item.imageUrl}"
-                android:contentDescription="@string/product_image" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:srcCompat="@tools:sample/avatars"
+                    app:imageUrl="@{item.imageUrl}"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/product_image" />
+
+            </androidx.cardview.widget.CardView>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:background="@color/off_white"
                 app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
                 app:layout_constraintStart_toEndOf="@+id/ivProductImage"
@@ -59,11 +70,12 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:background="@color/off_white"
                     android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -109,13 +121,11 @@
                         tools:text="20 EGP" />
                 </LinearLayout>
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/off_white"
-                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -123,10 +133,9 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/btn_plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:background="@color/off_white"
-                        android:padding="3dp"
                         android:src="@drawable/plus"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -142,22 +151,19 @@
                         android:padding="6dp"
                         android:text="@{quantity.toString()}"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btn_minus"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5"
                         tools:text="5" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/btn_minus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:background="@color/off_white"
-                        android:padding="3dp"
                         android:src="@drawable/minus"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/product_count"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5" />
@@ -170,12 +176,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
+                    android:animateLayoutChanges="true"
                     android:background="@color/off_white"
                     android:padding="5dp"
-                    android:animateLayoutChanges="true"
                     android:paddingHorizontal="5dp"
                     android:visibility="@{editVisibility ?View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
@@ -185,8 +191,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@color/off_white"
-                        android:src="@drawable/correct"
                         android:onClick="@{()-> listener.clickSave(item.productId , quantity)}"
+                        android:src="@drawable/correct"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -213,8 +219,10 @@
 
             <ImageButton
                 android:id="@+id/ibRemove"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="2dp"
                 android:onClick="@{()-> listener.clickDelete(item.productId)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@color/off_white"

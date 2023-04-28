@@ -68,4 +68,8 @@
 
     <string name="update_successfully">updated</string>
     <string name="update_failed">update failed</string>
+    <string name="login_as_guest">Login As Guest</string>
+    <string name="login_to_own_cart">Login to own cart</string>
+    <string name="categories">Categories</string>
+    <string name="empty_cart">Empty Cart</string>
 </resources>

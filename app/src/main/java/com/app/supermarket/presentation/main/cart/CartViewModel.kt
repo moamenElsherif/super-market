@@ -24,17 +24,12 @@ class CartViewModel @Inject constructor(
     private val addToCartUseCase: AddToCartUseCase
 ) : ViewModel() {
 
-    private var _cartResponse = MutableStateFlow<Resource<BaseResponse<MyCartResponse>>>(Resource.Loading)
+    private var _cartResponse = MutableStateFlow<Resource<BaseResponse<MyCartResponse>>>(Resource.Default)
     val cartResponse: StateFlow<Resource<BaseResponse<MyCartResponse>>> = _cartResponse
 
     private val _updateCartResponse =
         MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
     val updateCartResponse: StateFlow<Resource<BaseResponse<*>>> = _updateCartResponse
-
-
-    init {
-        getMyCart()
-    }
 
     fun getMyCart(){
         viewModelScope.launch {

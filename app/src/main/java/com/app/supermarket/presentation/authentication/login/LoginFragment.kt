@@ -103,6 +103,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginListener {
         this.requireActivity().recreate()
     }
 
+    override fun loginAsGuest() {
+        startActivity(Intent(this.requireContext(), MainActivity::class.java))
+    }
+
     companion object {
         const val USER_LOGGED_IN_EVENT_TAG = "USER_LOGGED_IN_EVENT_TAG"
     }

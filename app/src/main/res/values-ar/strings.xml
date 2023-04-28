@@ -66,4 +66,8 @@
     <string name="user_image">صوره المستخدم</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="address">العنوان</string>
+    <string name="login_as_guest">دخول بدون تسجيل</string>
+    <string name="login_to_own_cart">سجل دخول للحصول علي قائمه مشتريات</string>
+    <string name="categories">المنتجات</string>
+    <string name="empty_cart">قائمه مشتريات فارغه</string>
 </resources>

@@ -8,7 +8,7 @@ import com.app.supermarket.base.callback.DiffCallback
 import com.app.supermarket.data.models.cart.ProductResponse
 import com.app.supermarket.databinding.CartProductItemBinding
 
-class CartItemAdapter(private val cartListener: CartItemListener) :
+class CartItemAdapter(private val cartListener: CartListener) :
     ListAdapter<ProductResponse, CartItemAdapter.CartItemViewHolder>(DiffCallback<ProductResponse>()) {
 
 
@@ -26,7 +26,7 @@ class CartItemAdapter(private val cartListener: CartItemListener) :
         private var initQuantity: Int = 1
         private var newQuantity: Int = 1
 
-        fun bind(cartItem: ProductResponse, cartListener: CartItemListener) {
+        fun bind(cartItem: ProductResponse, cartListener: CartListener) {
             binding.apply {
                 item = cartItem
                 listener = cartListener
