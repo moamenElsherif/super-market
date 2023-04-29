@@ -100,7 +100,7 @@ class MainAddressFragment : BaseFragment<FragmentMainAddressBinding>(), MainAddr
     }
 
     override fun clickBack() {
-        TODO("Not yet implemented")
+        this.requireActivity().finish()
     }
 
 }
