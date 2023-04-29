@@ -42,7 +42,7 @@ class DataSource @Inject constructor(
         apiService.getUserAddress(userId)
     }
 
-    suspend fun adUserAddress(addressRequest: AddressRequest) = safeApiCall {
+    suspend fun addUserAddress(addressRequest: AddressRequest) = safeApiCall {
         apiService.addUserAddress(addressRequest)
     }
 }

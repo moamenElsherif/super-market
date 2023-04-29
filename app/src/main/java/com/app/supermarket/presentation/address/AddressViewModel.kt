@@ -1,4 +1,4 @@
-package com.app.supermarket.presentation.main.settings.address
+package com.app.supermarket.presentation.address
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,9 @@ class AddressViewModel @Inject constructor(
     private val getUserAddressUseCase: GetUserAddressUseCase,
     auth: Auth
 ) : ViewModel() {
-    private val _userAddress: MutableLiveData<UserAddressUiState> = MutableLiveData(UserAddressUiState())
+    private val _userAddress: MutableLiveData<UserAddressUiState> = MutableLiveData(
+        UserAddressUiState()
+    )
     val userAddress: LiveData<UserAddressUiState>
         get() = _userAddress
 

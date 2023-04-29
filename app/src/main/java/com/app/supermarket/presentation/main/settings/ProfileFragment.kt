@@ -9,7 +9,7 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.databinding.FragmentProfileBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
-import com.app.supermarket.presentation.main.settings.address.AddressActivity
+import com.app.supermarket.presentation.address.AddressActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

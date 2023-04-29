@@ -80,5 +80,7 @@
     <string name="street">Street</string>
     <string name="address_note">Address Note</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="pick_another_address">pick another address</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.app.supermarket.presentation.main.settings.address
+package com.app.supermarket.presentation.address
 
 import com.app.supermarket.data.models.request.AddressRequest
 

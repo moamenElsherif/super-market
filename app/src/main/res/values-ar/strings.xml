@@ -76,4 +76,6 @@
     <string name="street">الشارع</string>
     <string name="address_note">ملحوظه العنوان</string>
     <string name="save">حفظ</string>
+    <string name="edit">تعديل</string>
+    <string name="pick_another_address">قم باختيار عنوان اخر</string>
 </resources>

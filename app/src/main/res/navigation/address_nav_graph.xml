@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/address_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/address_nav_graph"
+    app:startDestination="@id/mainAddressFragment">
 
+    <fragment
+        android:id="@+id/mainAddressFragment"
+        android:name="com.app.supermarket.presentation.address.mainaddress.MainAddressFragment"
+        android:label="MainAddressFragment"
+        tools:layout="@layout/fragment_main_address"/>
+    <fragment
+        android:id="@+id/favouriteLocations"
+        android:name="com.app.supermarket.presentation.address.favouritelocation.FavouriteLocations"
+        android:label="FavouriteLocations"
+        tools:layout="@layout/fragment_favourite_locations"/>
 </navigation>

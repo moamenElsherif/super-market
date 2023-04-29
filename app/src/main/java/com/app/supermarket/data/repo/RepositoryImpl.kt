@@ -1,7 +1,6 @@
 package com.app.supermarket.data.repo
 
 import com.app.supermarket.base.BaseResponse
-import com.app.supermarket.base.NullableBaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.datasource.DataSource
 import com.app.supermarket.data.models.request.AddressRequest
@@ -40,6 +39,6 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun addUserAddress(addressRequest: AddressRequest): Resource<BaseResponse<AddressResponse>> {
-        return dataSource.adUserAddress(addressRequest)
+        return dataSource.addUserAddress(addressRequest)
     }
 }

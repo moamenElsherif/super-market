@@ -1,6 +1,6 @@
 package com.app.supermarket.data.models.response
 
-import com.app.supermarket.presentation.main.settings.address.UserAddressUiState
+import com.app.supermarket.presentation.address.UserAddressUiState
 import com.google.gson.annotations.SerializedName
 
 data class AddressResponse(
