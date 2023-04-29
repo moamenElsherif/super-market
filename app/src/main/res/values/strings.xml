@@ -58,7 +58,7 @@
     <string name="order_details">Order Info</string>
     <string name="delivering_address">Delivering Address</string>
     <string name="price_formate">%f EGP</string>
-    <string name="successfully_added_to_cart">Added To Cart Successfully</string>
+    <string name="successfully_added_to_cart">Added Successfully</string>
     <string name="create_account">Create Account</string>
     <string name="future_shopping">Future Shopping</string>
     <string name="user_image">User Image</string>

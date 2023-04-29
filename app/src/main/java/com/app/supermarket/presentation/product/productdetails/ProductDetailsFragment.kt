@@ -1,5 +1,7 @@
 package com.app.supermarket.presentation.product.productdetails
 
+import android.animation.*
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -95,6 +97,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                     is Resource.Loading -> showLoading()
                     is Resource.Success -> {
                         createToast(R.string.successfully_added_to_cart)
+                        createStartImageAnimator()
                         hideLoading()
                     }
                     is Resource.Failure -> {
@@ -106,8 +109,21 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                 }
             }
         }
-
     }
+
+
+    private fun createStartImageAnimator(){
+        val scaleValueAnimator = ValueAnimator.ofFloat(1.0f, 1.5f, 1.0f ,1.5f ,1.0f)
+        scaleValueAnimator.duration = 1500
+        scaleValueAnimator.addUpdateListener { valueAnimator ->
+            val animatedValue = valueAnimator.animatedValue as Float
+            binding.ivCart.scaleX = animatedValue
+            binding.ivCart.scaleY = animatedValue
+        }
+
+        scaleValueAnimator.start()
+    }
+
 
     private fun getUiState(it: ProductResponse): ProductDetailsUiState? {
         return ProductDetailsUiState(
