@@ -66,7 +66,8 @@
                 android:background="@color/off_white"
                 app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
                 app:layout_constraintStart_toEndOf="@+id/ivProductImage"
-                app:layout_constraintTop_toTopOf="@+id/ivProductImage">
+                app:layout_constraintTop_toTopOf="@+id/ivProductImage"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -74,10 +75,11 @@
                     android:layout_height="wrap_content"
                     android:background="@color/off_white"
                     android:orientation="vertical"
+                    android:layout_marginStart="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout2">
 
                     <TextView
                         android:id="@+id/tvProductName"
@@ -105,7 +107,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/ibRemove"
                         app:layout_constraintStart_toStartOf="@+id/tvProductName"
                         app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-                        tools:text="Some product item descreptio like price" />
+                        tools:text="Some product item descreptio like priceome product item descreptio like price" />
 
                     <TextView
                         android:id="@+id/tvProductPrice"
@@ -127,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/off_white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                     app:layout_constraintVertical_bias="1.0">
 

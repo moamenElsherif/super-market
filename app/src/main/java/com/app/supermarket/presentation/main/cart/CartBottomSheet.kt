@@ -30,6 +30,8 @@ class CartBottomSheet: BottomSheetDialogFragment() {
                     bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
                 parentLayout?.let { it ->
                     val behaviour = BottomSheetBehavior.from(it)
+//                    val peekHeight = resources.getDimensionPixelSize(R.dimen.maxheight)
+//                    behaviour.peekHeight = peekHeight
                     behaviour.state = BottomSheetBehavior.STATE_EXPANDED
                     behaviour.isFitToContents = true
                     behaviour.expandedOffset = 200
@@ -45,7 +47,6 @@ class CartBottomSheet: BottomSheetDialogFragment() {
 
     private fun setupFullHeight(bottomSheet: View) {
         val layoutParams = bottomSheet.layoutParams
-
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
         bottomSheet.layoutParams = layoutParams
     }
