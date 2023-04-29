@@ -37,8 +37,9 @@ class AddressViewModel @Inject constructor(
         viewModelScope.launch {
             getUserAddressUseCase(userId).collectLatest { resource ->
                 if (resource is Resource.Success) {
-                    val data = resource.value.result
-                    _userAddress.value = data.toUserAddressUiState()
+                   resource.value.result?.let { addressResponse ->
+                       _userAddress.value = addressResponse.toUserAddressUiState()
+                   }
                 }
             }
         }

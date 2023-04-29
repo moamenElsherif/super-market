@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="address"
+            type="com.app.supermarket.presentation.main.settings.address.UserAddressUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +51,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_apartment_num"
                 android:layout_width="match_parent"
+                android:text="@{address.apartmentNum}"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -70,6 +73,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_building_num"
                 android:layout_width="match_parent"
+                android:text="@{address.buildingNum}"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,6 +95,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_street"
                 android:layout_width="match_parent"
+                android:text="@{address.street}"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -115,6 +120,7 @@
                 android:id="@+id/ed_address_note"
                 android:layout_width="match_parent"
                 android:gravity="top"
+                android:text="@{address.addressNotes}"
                 android:layout_height="match_parent" />
 
         </com.google.android.material.textfield.TextInputLayout>

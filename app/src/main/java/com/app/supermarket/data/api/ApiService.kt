@@ -1,6 +1,7 @@
 package com.app.supermarket.data.api
 
 import com.app.supermarket.base.BaseResponse
+import com.app.supermarket.base.NullableBaseResponse
 import com.app.supermarket.data.models.request.AddressRequest
 import com.app.supermarket.data.models.request.LoginRequest
 import com.app.supermarket.data.models.request.RegisterRequest
@@ -34,7 +35,7 @@ interface ApiService {
     suspend fun getUserData(@Query(value = "Id") userId: Int) : BaseResponse<UserDataResponse>
 
     @GET(GET_USER_ADDRESS_BY_ID)
-    suspend fun getUserAddress(@Query(value = "id") userId: Int) : BaseResponse<AddressResponse>
+    suspend fun getUserAddress(@Query(value = "id") userId: Int) : BaseResponse<AddressResponse?>
 
     @POST(ADD_USER_ADDRESS)
     suspend fun addUserAddress(@Body addressRequest : AddressRequest) : BaseResponse<AddressResponse>

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AddressRequest(
     @SerializedName("id")
-    val userId: Int,
+    val addressId: Int,
     val latitude : Int = 0,
     @SerializedName("longtude")
     val longitude : Int = 0,

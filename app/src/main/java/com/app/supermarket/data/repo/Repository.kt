@@ -1,6 +1,7 @@
 package com.app.supermarket.data.repo
 
 import com.app.supermarket.base.BaseResponse
+import com.app.supermarket.base.NullableBaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.models.request.AddressRequest
 import com.app.supermarket.data.models.request.LoginRequest
@@ -17,7 +18,7 @@ interface Repository {
 
     suspend fun listAllUserCartProducts(): Resource<BaseResponse<AllCartItemsResponse>>
 
-    suspend fun getUserAddress(userId: Int): Resource<BaseResponse<AddressResponse>>
+    suspend fun getUserAddress(userId: Int): Resource<BaseResponse<AddressResponse?>>
 
     suspend fun addUserAddress(addressRequest: AddressRequest): Resource<BaseResponse<AddressResponse>>
 }

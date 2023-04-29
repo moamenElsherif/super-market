@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AddressResponse(
     @SerializedName("id")
-    val userId: Int,
+    val addressId: Int,
     val latitude : Int = 0,
     @SerializedName("longtude")
     val longitude : Int = 0,
@@ -15,5 +15,5 @@ data class AddressResponse(
     val street : String,
     val addressNotes : String,
 ) {
-    fun toUserAddressUiState() = UserAddressUiState(userId, apartmentNum, buildingNum, street, addressNotes)
+    fun toUserAddressUiState() = UserAddressUiState(addressId, apartmentNum, buildingNum, street, addressNotes)
 }

@@ -1,6 +1,7 @@
 package com.app.supermarket.data.repo
 
 import com.app.supermarket.base.BaseResponse
+import com.app.supermarket.base.NullableBaseResponse
 import com.app.supermarket.base.Resource
 import com.app.supermarket.data.datasource.DataSource
 import com.app.supermarket.data.models.request.AddressRequest
@@ -34,7 +35,7 @@ class RepositoryImpl @Inject constructor(
         return dataSource.listAllUserCartProducts()
     }
 
-    override suspend fun getUserAddress(userId: Int): Resource<BaseResponse<AddressResponse>> {
+    override suspend fun getUserAddress(userId: Int): Resource<BaseResponse<AddressResponse?>> {
         return dataSource.getUserAddress(userId)
     }
 
