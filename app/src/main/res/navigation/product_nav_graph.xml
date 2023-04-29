@@ -24,6 +24,15 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_cartBottomSheet"
+            app:destination="@id/cartBottomSheet" />
     </fragment>
+
+    <dialog
+        android:id="@+id/cartBottomSheet"
+        android:name="com.app.supermarket.presentation.main.cart.CartBottomSheet"
+        android:label="CartBottomSheet"
+        tools:layout="@layout/cart_bottom_sheet"/>
 
 </navigation>

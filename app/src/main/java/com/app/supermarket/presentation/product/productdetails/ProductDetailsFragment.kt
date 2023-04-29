@@ -143,13 +143,13 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     }
 
     override fun clickOpenCart() {
+        findNavController().navigate(ProductDetailsFragmentDirections.actionProductDetailsFragmentToCartBottomSheet())
     }
 
     override fun clickAddToCart() {
         if (!auth.getAccessToken().isNullOrEmpty()) {
             productId?.let { viewModel.addToCart(it, productCount.value!!) }
-        }
-        else {
+        } else {
             openAuthActivity()
         }
     }

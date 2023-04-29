@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.supermarket.R
 import com.app.supermarket.base.BaseFragment
@@ -57,7 +57,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
 
     private fun cartLoginVisibility(loggedIn: Boolean) {
         binding.loginView.isVisible = !loggedIn
-        binding.swipeRefreshLayoutCategories.isVisible = loggedIn
+        binding.cartView.isVisible = loggedIn
     }
 
     private fun handleRefresh() {
