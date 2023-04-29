@@ -9,6 +9,7 @@ import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.auth.Auth
 import com.app.supermarket.databinding.FragmentProfileBinding
 import com.app.supermarket.presentation.authentication.AuthenticationActivity
+import com.app.supermarket.presentation.main.settings.address.AddressActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -74,7 +75,12 @@ class ProfileFragment :BaseFragment<FragmentProfileBinding>(), ProfileClickListe
     }
 
     override fun onEditAddressClickListener() {
+        navigateToAddressActivity()
+    }
 
+    private fun navigateToAddressActivity() {
+        val intent = Intent(requireActivity(), AddressActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToAuthActivity(closeCurrent: Boolean = false) {

@@ -12,7 +12,8 @@ open class BaseRemoteDataSource @Inject constructor() {
         try {
             val jsonObject = JSONObject(gson.toJson(requestData))
             for (i in 0 until jsonObject.names().length()) {
-                params[jsonObject.names().getString(i)] = jsonObject[jsonObject.names().getString(i)].toString() + ""
+                params[jsonObject.names().getString(i)] =
+                    jsonObject[jsonObject.names().getString(i)].toString() + ""
             }
         } catch (e: Exception) {
             e.stackTrace
@@ -24,16 +25,17 @@ open class BaseRemoteDataSource @Inject constructor() {
         return try {
             val apiResponse = apiCall.invoke()
             Timber.d("=> ${(apiResponse as BaseResponse<*>).success} <==")
-            println(apiResponse)
-                return when (apiResponse.success) {
-                    true -> Resource.Success(apiResponse)
-                    else -> {
-                        if (apiResponse.unAuthorizedRequest) Resource.Failure(FailureStatus.TOKEN_EXPIRED)
-                        else Resource.Failure(FailureStatus.API_FAIL)
-                    }
-                }
 
-        }catch (e: Exception){
+            println(apiResponse)
+            return when (apiResponse.success) {
+                true -> Resource.Success(apiResponse)
+                else -> {
+                    if (apiResponse.unAuthorizedRequest) Resource.Failure(FailureStatus.TOKEN_EXPIRED)
+                    else Resource.Failure(FailureStatus.API_FAIL)
+                }
+            }
+
+        } catch (e: Exception) {
             Timber.d(e)
             Resource.Failure(FailureStatus.API_FAIL)
         }

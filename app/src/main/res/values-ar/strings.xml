@@ -70,4 +70,10 @@
     <string name="login_to_own_cart">سجل دخول للحصول علي قائمه مشتريات</string>
     <string name="categories">المنتجات</string>
     <string name="empty_cart">قائمه مشتريات فارغه</string>
+    <string name="previous">السابق</string>
+    <string name="apartment_num">رقم الشقه</string>
+    <string name="building_num">رقم المبني</string>
+    <string name="street">الشارع</string>
+    <string name="address_note">ملحوظه العنوان</string>
+    <string name="save">حفظ</string>
 </resources>

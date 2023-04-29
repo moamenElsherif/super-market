@@ -72,4 +72,13 @@
     <string name="login_to_own_cart">Login to own cart</string>
     <string name="categories">Categories</string>
     <string name="empty_cart">Empty Cart</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="apartment_num">Apartment Num</string>
+    <string name="building_num">Building Num</string>
+    <string name="street">Street</string>
+    <string name="address_note">Address Note</string>
+    <string name="save">Save</string>
+
 </resources>

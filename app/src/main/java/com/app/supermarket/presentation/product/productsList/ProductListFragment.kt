@@ -56,11 +56,18 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         initSwipeRefreshListener(categoryId)
         initSearchInputObserver()
 
-        binding.tvTitle.text = categoryName
         getCategoryList(categoryId)
 
         binding.apply {
-            tvTitle.setOnClickListener {
+            toolBarProductList.apply {
+                title = categoryName
+
+                setNavigationOnClickListener {
+                    requireActivity().finish()
+                }
+            }
+
+            appBarProductList.setOnClickListener {
                 val dialog = BottomSheetDialog(requireContext())
 
                 val view = layoutInflater.inflate(R.layout.fragment_product_list, null)

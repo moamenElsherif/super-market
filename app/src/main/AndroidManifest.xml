@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SuperMarket"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.main.settings.address.AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.checkout.CheckoutActivity"
             android:exported="false" />
         <activity

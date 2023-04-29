@@ -1,19 +1,15 @@
 package com.app.supermarket.presentation.authentication.login
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.supermarket.R
-import com.app.supermarket.base.BaseApplication
 import com.app.supermarket.base.BaseFragment
 import com.app.supermarket.base.Constants
 import com.app.supermarket.base.Resource
 import com.app.supermarket.databinding.FragmentLoginBinding
 import com.app.supermarket.presentation.main.MainActivity
-import com.app.supermarket.presentation.authentication.AuthenticationActivity
-import com.bumptech.glide.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 
 
