@@ -28,7 +28,6 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     private const val REQUEST_TIME_OUT: Long = 60
-    private val token = BaseApplication.getAppInstance().auth.getAccessToken()
 
     @Provides
     @Singleton
@@ -38,7 +37,7 @@ object RetrofitModule {
                 chain.request().newBuilder()
                     .addHeader("accept", "text/plain")
                     .addHeader("Content-Type",  "application/json-patch+json")
-                    .addHeader("Authorization", "Bearer $token")
+                    .addHeader("Authorization", "Bearer ${BaseApplication.getAppInstance().auth.getAccessToken()}")
                     .addHeader("X-XSRF-TOKEN", "")
                     .build()
             )
